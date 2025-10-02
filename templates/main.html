@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Главная страница</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-menu-container {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+        }
+
+        /* Круг для аватара */
+        .avatar-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #ccc; /* светло-серый фон */
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
+        }
+
+        /* Меню скрыто по умолчанию */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 50px; /* чуть ниже круга */
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            min-width: 140px;
+            padding: 5px 0;
+        }
+
+        /* Стили кнопок меню */
+        .dropdown-menu button {
+            background: none;
+            border: none;
+            width: 100%;
+            padding: 8px 15px;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .dropdown-menu button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Блок логотипа -->
+<a href="/" class="logo-link">LOGO</a>
+    <div style="text-align:center; margin: 50px 0;">
+        <button id="hikesButton">Походы</button>
+        <button onclick="location.href='/about'">О нас</button>
+        <button onclick="location.href='/reviews'">Отзывы</button>
+        <ul id="hikesList" style="display:none; margin:0; padding-left: 20px; list-style: none; position: absolute; left: 50%; transform: translateX(-50%); background: none;">
+            <li><a href="/finland">Финляндия</a></li>
+            <li><a href="/sweden">Швеция</a></li>
+            <li><a href="/norway">Норвегия</a></li>
+            <li><a href="/denmark">Дания</a></li>
+            <li><a href="/germany">Германия</a></li>
+        </ul>
+    </div>
+
+    <div class="profile-menu-container" id="profileContainer" title="Меню пользователя">
+        <div class="avatar-circle" id="avatarCircle"></div>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <button onclick="location.href='/register'">Зарегистрироваться</button>
+            <button onclick="location.href='/login'">Войти в аккаунт</button>
+        </div>
+    </div>
+
+    <script>
+      // Работа с меню "Походы"
+      const hikesButton = document.getElementById('hikesButton');
+      const hikesList = document.getElementById('hikesList');
+      let hikesHideTimeout;
+
+      function showHikes() {
+        if (hikesHideTimeout) {
+          clearTimeout(hikesHideTimeout);
+          hikesHideTimeout = null;
+        }
+        hikesList.style.display = 'block';
+      }
+
+      function hideHikesDelayed() {
+        hikesHideTimeout = setTimeout(() => {
+          hikesList.style.display = 'none';
+        }, 500);
+      }
+
+      hikesButton.addEventListener('mouseenter', showHikes);
+      hikesButton.addEventListener('mouseleave', hideHikesDelayed);
+      hikesList.addEventListener('mouseenter', () => {
+        if (hikesHideTimeout) {
+          clearTimeout(hikesHideTimeout);
+          hikesHideTimeout = null;
+        }
+      });
+      hikesList.addEventListener('mouseleave', hideHikesDelayed);
+
+      // Работа с профильным меню
+      const container = document.getElementById('profileContainer');
+      const menu = document.getElementById('dropdownMenu');
+      let menuHideTimeout = null;
+
+      function showMenu() {
+        if (menuHideTimeout) {
+          clearTimeout(menuHideTimeout);
+          menuHideTimeout = null;
+        }
+        menu.style.display = 'block';
+      }
+
+      function hideMenuWithDelay() {
+        menuHideTimeout = setTimeout(() => {
+          menu.style.display = 'none';
+        }, 500);
+      }
+
+      container.addEventListener('mouseenter', showMenu);
+      container.addEventListener('mouseleave', hideMenuWithDelay);
+
+      // Изначально скрыть меню пользователя при загрузке страницы
+      window.addEventListener('load', () => {
+        menu.style.display = 'none';
+      });
+
+        const isAuthenticated = {{ 'true' if 'user_id' in session else 'false' }};
+
+  document.getElementById('avatarCircle').addEventListener('click', () => {
+    if (isAuthenticated === 'true') {
+      window.location.href = '/profile';
+    } else {
+      window.location.href = '/login';
+    }
+  });
+    </script>
+
+</body>
+</html>

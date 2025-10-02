@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Авторизация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 25px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        .switch-link {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .switch-link a {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<!-- Блок логотипа -->
+<a href="/" class="logo-link">LOGO</a>
+<h1>Авторизация</h1>
+<form id="loginForm" novalidate>
+    <label for="email">Почта</label>
+    <input type="email" id="email" name="email" required autocomplete="email" />
+    <div class="error" id="emailError"></div>
+
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="password" autocomplete="current-password" />
+    <div class="error" id="passwordError"></div>
+
+    <button type="submit">Войти</button>
+</form>
+
+<div class="switch-link">
+    Нет аккаунта? <a href="register">Зарегистрируйтесь</a>
+</div>
+
+<script>
+    const form = document.getElementById('loginForm');
+
+    const emailInput = form.email;
+    const passwordInput = document.getElementById('password');
+
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+
+    function validateEmail(email) {
+        if (!email.includes('@')) return false;
+        return /^[a-zA-Z0-9@._\-]+$/.test(email);
+    }
+
+    form.addEventListener('submit', e => {
+        let valid = true;
+
+        if (!emailInput.value.trim()) {
+            emailError.textContent = "Пожалуйста, введите почту";
+            valid = false;
+        } else if (!validateEmail(emailInput.value.trim())) {
+            emailError.textContent = "Почта должна содержать только латинские буквы, цифры, символы @, . _ - и не содержать русских букв";
+            valid = false;
+        } else {
+            emailError.textContent = "";
+        }
+
+        const passVal = passwordInput.value;
+        if (!passVal) {
+            passwordError.textContent = "Пожалуйста, введите пароль";
+            valid = false;
+        } else if (passVal.length < 8) {
+            passwordError.textContent = "Пароль должен быть не менее 8 символов";
+            valid = false;
+        } else if (!/^[A-Za-z0-9]+$/.test(passVal)) {
+            passwordError.textContent = "Пароль должен содержать только латинские буквы и цифры";
+            valid = false;
+        } else if (!/[A-Za-z]/.test(passVal)) {
+            passwordError.textContent = "Пароль должен содержать хотя бы одну латинскую букву";
+            valid = false;
+        } else if (!/\d/.test(passVal)) {
+            passwordError.textContent = "Пароль должен содержать хотя бы одну цифру";
+            valid = false;
+        } else {
+            passwordError.textContent = "";
+        }
+
+        if (!valid) {
+            e.preventDefault();
+        } else {
+            alert("Авторизация успешна!");
+        }
+    });
+</script>
+</body>
+</html>
