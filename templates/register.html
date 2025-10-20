@@ -1,97 +1,110 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <title>Регистрация</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        input {
-            padding: 8px;
-            font-size: 16px;
-            margin-top: 5px;
-        }
-        button {
-            margin-top: 25px;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-top: 4px;
-        }
-        .switch-link {
-            margin-top: 20px;
-            font-size: 14px;
-            text-align: center;
-        }
-        .switch-link a {
-            color: blue;
-            text-decoration: none;
-        }
-    </style>
+<meta charset="UTF-8" />
+<title>Регистрация</title>
 </head>
 <body>
-<!-- Блок логотипа -->
-<a href="/" class="logo-link">LOGO</a>
+
 <h1>Регистрация</h1>
-<form id="registerForm" novalidate>
+
+<form id="registerForm" method="POST" action="{{ url_for('register') }}">
+    <!-- Имя -->
+    <label for="name">Имя</label>
+    <input type="text" id="name" name="name" required autocomplete="name" />
+    <div class="error" id="nameError"></div>
+
+    <!-- Номер телефона с фиксированным префиксом +7 -->
+    <label for="phone">Номер телефона</label>
+    <div class="phone-container">
+        <div class="phone-prefix">+7</div>
+        <input type="tel" id="phone" name="phone" maxlength="10" required placeholder="ХХХ-ХХХ-ХХ-ХХ" autocomplete="tel" />
+    </div>
+    <div class="error" id="phoneError"></div>
+
+    <!-- Почта -->
     <label for="email">Почта</label>
     <input type="email" id="email" name="email" required autocomplete="email" />
     <div class="error" id="emailError"></div>
 
+    <!-- Пароль -->
     <label for="password">Пароль</label>
     <input type="password" id="password" name="password" required autocomplete="new-password" />
     <div class="error" id="passwordError"></div>
 
     <button type="submit">Зарегистрироваться</button>
+
+    <!-- Блок с отображением сообщений -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul style="color: red;">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 </form>
 
 <div class="switch-link">
-    Зарегистрированы? <a href="login">Войдите в аккаунт</a>
+    Зарегистрированы? <a href="/login">Войдите в аккаунт</a>
 </div>
 
 <script>
     const form = document.getElementById('registerForm');
 
+    const nameInput = form.name;
     const emailInput = form.email;
     const passwordInput = document.getElementById('password');
+    const phoneInput = document.getElementById('phone');
 
+    const nameError = document.getElementById('nameError');
     const emailError = document.getElementById('emailError');
     const passwordError = document.getElementById('passwordError');
+    const phoneError = document.getElementById('phoneError');
 
     function validateEmail(email) {
-        if (!email.includes('@')) return false;
-        return /^[a-zA-Z0-9@._\-]+$/.test(email);
+        // Более строгая проверка email (может быть расширена)
+        const emailRegex = /^[a-zA-Z0-9._\-]+@[a-zA-Z0-9._\-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email);
+    }
+
+    function validateName(name) {
+        // Разрешены только русские и латинские буквы, минимум 3 символа
+        return /^[A-Za-zА-Яа-я]{3,}$/.test(name);
+    }
+
+    function validatePhone(phone) {
+        // Только 10 цифр
+        return /^\d{10}$/.test(phone);
     }
 
     form.addEventListener('submit', e => {
         let valid = true;
 
+        // Проверка Имени
+        if (!nameInput.value.trim()) {
+            nameError.textContent = "Пожалуйста, введите имя";
+            valid = false;
+        } else if (!validateName(nameInput.value.trim())) {
+            nameError.textContent = "Имя должно состоять минимум из 3 русских или латинских букв без других символов.";
+            valid = false;
+        } else {
+            nameError.textContent = "";
+        }
+
+        // Проверка почты
         if (!emailInput.value.trim()) {
             emailError.textContent = "Пожалуйста, введите почту";
             valid = false;
         } else if (!validateEmail(emailInput.value.trim())) {
-            emailError.textContent = "Почта должна содержать только латинские буквы, цифры, символы @, . _ - и не содержать русских букв";
+            emailError.textContent = "Пожалуйста, введите корректный адрес электронной почты";
             valid = false;
         } else {
             emailError.textContent = "";
         }
 
+        // Проверка пароля
         const passVal = passwordInput.value;
         if (!passVal) {
             passwordError.textContent = "Пожалуйста, введите пароль";
@@ -112,12 +125,27 @@
             passwordError.textContent = "";
         }
 
+        // Проверка номера телефона
+        const phoneVal = document.getElementById('phone').value.trim();
+        if (!phoneVal) {
+            phoneError.textContent = "Пожалуйста, введите 10 цифр после префикса +7";
+            valid = false;
+        } else if (!validatePhone(phoneVal)) {
+            phoneError.textContent = "Введите корректные 10 цифр после префикса +7";
+            valid = false;
+        } else {
+            phoneError.textContent = "";
+        }
+
         if (!valid) {
             e.preventDefault();
-        } else {
-            alert("Регистрация успешно завершена!");
         }
     });
 </script>
+
+<footer class="site-footer">
+  © Aryan Tours. Все права защищены.
+</footer>
+
 </body>
 </html>

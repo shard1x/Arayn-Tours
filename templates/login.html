@@ -1,55 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <title>Авторизация</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        input {
-            padding: 8px;
-            font-size: 16px;
-            margin-top: 5px;
-        }
-        button {
-            margin-top: 25px;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-top: 4px;
-        }
-        .switch-link {
-            margin-top: 20px;
-            font-size: 14px;
-            text-align: center;
-        }
-        .switch-link a {
-            color: blue;
-            text-decoration: none;
-        }
-    </style>
+<meta charset="UTF-8" />
+<title>Авторизация</title>
 </head>
 <body>
-<!-- Блок логотипа -->
-<a href="/" class="logo-link">LOGO</a>
+
 <h1>Авторизация</h1>
-<form id="loginForm" novalidate>
+
+<form id="loginForm" method="POST" action="{{ url_for('login') }}" novalidate>
     <label for="email">Почта</label>
     <input type="email" id="email" name="email" required autocomplete="email" />
     <div class="error" id="emailError"></div>
@@ -65,6 +24,17 @@
     Нет аккаунта? <a href="register">Зарегистрируйтесь</a>
 </div>
 
+<!-- Блок с флеш-сообщениями -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="color: red; margin-top: 20px; list-style: none; padding: 0;">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 <script>
     const form = document.getElementById('loginForm');
 
@@ -76,12 +46,14 @@
 
     function validateEmail(email) {
         if (!email.includes('@')) return false;
+        // Можно оставить вашу проверку или улучшить
         return /^[a-zA-Z0-9@._\-]+$/.test(email);
     }
 
     form.addEventListener('submit', e => {
         let valid = true;
 
+        // Проверка почты
         if (!emailInput.value.trim()) {
             emailError.textContent = "Пожалуйста, введите почту";
             valid = false;
@@ -92,6 +64,7 @@
             emailError.textContent = "";
         }
 
+        // Проверка пароля
         const passVal = passwordInput.value;
         if (!passVal) {
             passwordError.textContent = "Пожалуйста, введите пароль";
@@ -114,10 +87,14 @@
 
         if (!valid) {
             e.preventDefault();
-        } else {
-            alert("Авторизация успешна!");
         }
+        // Можно убрать alert для реальной отправки
     });
 </script>
+
+<footer class="site-footer">
+  © Aryan Tours. Все права защищены.
+</footer>
+
 </body>
 </html>
