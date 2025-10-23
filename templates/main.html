@@ -3,16 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <title>Главная страница</title>
-<!-- Подключение внешних файлов стилей убрано -->
+<!-- Подключение внешнего CSS -->
+<link rel="stylesheet" href="/static/css/style.css" />
 </head>
 <body>
 
-<!-- Основной контент без стилей -->
-<div>
+<!-- Логотип в левом верхнем -->
+<a href="/" class="logo-link">
+  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+</a>
+
+<!-- Основной контент -->
+<div class="button-section">
     <button id="hikesButton">Походы</button>
     <button onclick="location.href='/about'">О нас</button>
     <button onclick="location.href='/reviews'">Отзывы</button>
-    <ul id="hikesList" style="display:none;">
+    <ul id="hikesList" class="hidden">
         <li><a href="/finland">Финляндия</a></li>
         <li><a href="/sweden">Швеция</a></li>
         <li><a href="/norway">Норвегия</a></li>
@@ -22,147 +28,56 @@
     </ul>
 </div>
 
-<!-- Меню профиля -->
-<div id="profileContainer" title="Меню пользователя">
-    <div id="avatarCircle"></div>
-    <div id="dropdownMenu">
-        <button onclick="location.href='/register'">Зарегистрироваться</button>
-        <button onclick="location.href='/login'">Войти в аккаунт</button>
-    </div>
-</div>
-
 <!-- Раздел со странами -->
-<div>
-
-  <!-- Блок 1: Финляндия -->
-  <a href="/finland">
-    <div>
-      <img src="path/to/finland.jpg" alt="Финляндия" />
-      <div></div>
-      <div>Финляндия</div>
+<div class="countries-container">
+  <!-- Финляндия -->
+  <a href="/finland" class="country-card">
+    <div class="card-wrapper">
+      <img src="static/images/finland.jpg" alt="Финляндия" />
+      <div class="country-name">Финляндия</div>
     </div>
   </a>
-
-  <!-- Блок 2: Швеция -->
-  <a href="/sweden">
-    <div>
-      <img src="path/to/sweden.jpg" alt="Швеция" />
-      <div></div>
-      <div>Швеция</div>
+  <!-- Швеция -->
+  <a href="/sweden" class="country-card">
+    <div class="card-wrapper">
+      <img src="static/images/sweden.jpg" alt="Швеция" />
+      <div class="country-name">Швеция</div>
     </div>
   </a>
-
-  <!-- Блок 3: Норвегия -->
-  <a href="/norway">
-    <div>
-      <img src="path/to/norway.jpg" alt="Норвегия" />
-      <div></div>
-      <div>Норвегия</div>
+  <!-- Норвегия -->
+  <a href="/norway" class="country-card">
+    <div class="card-wrapper">
+      <img src="static/images/norway.jpg" alt="Норвегия" />
+      <div class="country-name">Норвегия</div>
     </div>
   </a>
-
-  <!-- Блок 4: Россия -->
-  <a href="/russia">
-    <div>
-      <img src="/templates/images/kareliya.png" alt="Россия" />
-      <div></div>
-      <div>Россия</div>
+  <!-- Россия -->
+  <a href="/russia" class="country-card">
+    <div class="card-wrapper">
+      <img src="static/images/russia.jpg" alt="Россия" />
+      <div class="country-name">Россия</div>
     </div>
   </a>
-
-  <!-- Блок 5: Дания -->
-  <a href="/denmark">
-    <div>
-      <img src="path/to/denmark.jpg" alt="Дания" />
-      <div></div>
-      <div>Дания</div>
+  <!-- Дания -->
+  <a href="/denmark" class="country-card">
+    <div class="card-wrapper">
+      <img src="static/images/denmark.jpg" alt="Дания" />
+      <div class="country-name">Дания</div>
     </div>
   </a>
-
-  <!-- Блок 6: Германия -->
-  <a href="/germany">
-    <div>
-      <img src="path/to/germany.jpg" alt="Германия" />
-      <div></div>
-      <div>Германия</div>
+  <!-- Германия -->
+  <a href="/germany" class="country-card">
+    <div class="card-wrapper">
+      <img src="static/images/germany.jpg" alt="Германия" />
+      <div class="country-name">Германия</div>
     </div>
   </a>
-
 </div>
 
 <!-- Футер -->
-<div>
+<div class="footer">
     © Aryan Tours. Все права защищены.
 </div>
-
-<script>
-    // Работа с меню "Походы"
-    const hikesButton = document.getElementById('hikesButton');
-    const hikesList = document.getElementById('hikesList');
-    let hikesHideTimeout;
-
-    function showHikes() {
-        if (hikesHideTimeout) {
-            clearTimeout(hikesHideTimeout);
-            hikesHideTimeout = null;
-        }
-        hikesList.style.display = 'block';
-    }
-
-    function hideHikesDelayed() {
-        hikesHideTimeout = setTimeout(() => {
-            hikesList.style.display = 'none';
-        }, 500);
-    }
-
-    hikesButton.addEventListener('mouseenter', showHikes);
-    hikesButton.addEventListener('mouseleave', hideHikesDelayed);
-    hikesList.addEventListener('mouseenter', () => {
-        if (hikesHideTimeout) {
-            clearTimeout(hikesHideTimeout);
-            hikesHideTimeout = null;
-        }
-    });
-    hikesList.addEventListener('mouseleave', hideHikesDelayed);
-
-    // Работа с профильным меню
-    const container = document.getElementById('profileContainer');
-    const menu = document.getElementById('dropdownMenu');
-    let menuHideTimeout = null;
-
-    function showMenu() {
-        if (menuHideTimeout) {
-            clearTimeout(menuHideTimeout);
-            menuHideTimeout = null;
-        }
-        menu.style.display = 'block';
-    }
-
-    function hideMenuWithDelay() {
-        menuHideTimeout = setTimeout(() => {
-            menu.style.display = 'none';
-        }, 500);
-    }
-
-    container.addEventListener('mouseenter', showMenu);
-    container.addEventListener('mouseleave', hideMenuWithDelay);
-
-    // Изначально скрыть меню пользователя
-    window.addEventListener('load', () => {
-        document.getElementById('dropdownMenu').style.display = 'none';
-    });
-
-    // Обработка авторизации (замените переменную на серверной стороне)
-    const isAuthenticated = {{ 'true' if 'user_id' in session else 'false' }};
-
-    document.getElementById('avatarCircle').addEventListener('click', () => {
-        if (isAuthenticated === 'true') {
-            window.location.href = '/profile';
-        } else {
-            window.location.href = '/login';
-        }
-    });
-</script>
 
 </body>
 </html>

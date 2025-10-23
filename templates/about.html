@@ -3,18 +3,27 @@
 <head>
 <meta charset="UTF-8" />
 <title>О нас</title>
+    <!-- Подключение внешнего CSS -->
+<link rel="stylesheet" href="/static/css/about_style.css" />
 </head>
 <body>
 
+<!-- Логотип в левом верхнем -->
+<a href="/" class="logo-link">
+  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+</a>
+
 <!-- Основной контент -->
-<div class="content-container">
-    <h1>О нас</h1>
-    <p>Это страница "О нас".</p>
-    <a href="/" class="return-link">Вернуться на главную</a>
+<div class="button-section">
+    <button id="hikesButton">Походы</button>
+    <button onclick="location.href='/about'">О нас</button>
+    <button onclick="location.href='/reviews'">Отзывы</button>
 </div>
 
+<a href="/" class="return-link">Вернуться на главную</a>
+
 <!-- Футер -->
-<div class="site-footer">
+<div class="footer">
     © Aryan Tours. Все права защищены.
 </div>
 
