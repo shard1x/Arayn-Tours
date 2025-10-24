@@ -3,18 +3,25 @@
 <head>
 <meta charset="UTF-8" />
 <title>Отзывы</title>
+    <!-- Подключение внешнего CSS -->
+<link rel="stylesheet" href="/static/css/reviews_style.css" />
 </head>
 <body>
 
+<!-- Логотип в левом верхнем -->
+<a href="/" class="logo-link">
+  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+</a>
+
 <!-- Основной контент -->
-<div>
-    <h1>Отзывы</h1>
-    <p>Это страница "Отзывы".</p>
-    <a href="/">Вернуться на главную</a>
+<div class="button-section">
+    <button id="hikesButton">Походы</button>
+    <button onclick="location.href='/about'">О нас</button>
+    <button onclick="location.href='/reviews'">Отзывы</button>
 </div>
 
 <!-- Футер -->
-<div>
+<div class="footer">
     © Aryan Tours. Все права защищены.
 </div>
 
