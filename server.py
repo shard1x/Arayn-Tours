@@ -61,6 +61,10 @@ def logout():
 def reviews():
     return render_template('reviews.html')
 
+@app.route('/choose_tour')
+def choose_tour():
+    return render_template('choose_tour.html')
+
 @app.route('/finland')
 def finland():
     return render_template('finland.html')
@@ -73,13 +77,9 @@ def sweden():
 def norway():
     return render_template('norway.html')
 
-@app.route('/russia')
+@app.route('/karelia')
 def russia():
-    return render_template('russia.html')
-
-@app.route('/denmark')
-def denmark():
-    return render_template('denmark.html')
+    return render_template('karelia.html')
 
 @app.route('/germany')
 def germany():

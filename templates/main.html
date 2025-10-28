@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<title>Главная страница</title>
-<!-- Подключение внешнего CSS -->
-<link rel="stylesheet" href="/static/css/style.css" />
+    <meta charset="UTF-8" />
+    <title>Главная страница</title>
+    <!-- Подключение внешнего CSS -->
+    <link rel="stylesheet" href="/static/css/style.css" />
 </head>
 <body>
 
 <!-- Логотип в левом верхнем -->
 <a href="/" class="logo-link">
-  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+    <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
 </a>
 
 <!-- Основной контент -->
 <div class="button-section">
-    <button id="hikesButton">Подобрать тур</button>
+    <button onclick="location.href='/choose_tour'">Подобрать тур</button>
     <button onclick="location.href='/about'">О нас</button>
     <button onclick="location.href='/contacts'">Контакты</button>
     <button onclick="location.href='/reviews'">Отзывы</button>
@@ -23,62 +23,58 @@
         <li><a href="/finland">Финляндия</a></li>
         <li><a href="/sweden">Швеция</a></li>
         <li><a href="/norway">Норвегия</a></li>
-        <li><a href="/denmark">Дания</a></li>
-        <li><a href="/russia">Россия</a></li>
+        <li><a href="/karelia">Республика Карелия</a></li>
         <li><a href="/germany">Германия</a></li>
     </ul>
 </div>
 
 <!-- Раздел со странами -->
-<div class="countries-container">
-  <!-- Финляндия -->
-  <a href="/finland" class="country-card">
-    <div class="card-wrapper">
-      <img src="static/images/finland.jpg" alt="Финляндия" />
-      <div class="country-name">Финляндия</div>
+<div class="carousel-wrapper">
+    <button id="prevBtn">«</button>
+    <div class="carousel-container">
+        <div class="cards-wrapper" id="cardsWrapper">
+            <!-- Ваши карточки начинаются здесь -->
+            <a href="/finland" class="country-card">
+                <div class="card-wrapper">
+                    <img src="static/images/finland.jpg" alt="Финляндия" />
+                    <div class="country-name">Финляндия</div>
+                </div>
+            </a>
+            <a href="/sweden" class="country-card">
+                <div class="card-wrapper">
+                    <img src="static/images/sweden.jpg" alt="Швеция" />
+                    <div class="country-name">Швеция</div>
+                </div>
+            </a>
+            <a href="/norway" class="country-card">
+                <div class="card-wrapper">
+                    <img src="static/images/norway.jpg" alt="Норвегия" />
+                    <div class="country-name">Норвегия</div>
+                </div>
+            </a>
+            <a href="/karelia" class="country-card">
+                <div class="card-wrapper">
+                    <img src="static/images/krelia.jpg" alt="Республика Карелия" />
+                    <div class="country-name">Республика карелия</div>
+                </div>
+            </a>
+            <a href="/germany" class="country-card">
+                <div class="card-wrapper">
+                    <img src="static/images/germany.jpg" alt="Германия" />
+                    <div class="country-name">Германия</div>
+                </div>
+            </a>
+        </div>
     </div>
-  </a>
-  <!-- Швеция -->
-  <a href="/sweden" class="country-card">
-    <div class="card-wrapper">
-      <img src="static/images/sweden.jpg" alt="Швеция" />
-      <div class="country-name">Швеция</div>
-    </div>
-  </a>
-  <!-- Норвегия -->
-  <a href="/norway" class="country-card">
-    <div class="card-wrapper">
-      <img src="static/images/norway.jpg" alt="Норвегия" />
-      <div class="country-name">Норвегия</div>
-    </div>
-  </a>
-  <!-- Россия -->
-  <a href="/russia" class="country-card">
-    <div class="card-wrapper">
-      <img src="static/images/russia.jpg" alt="Россия" />
-      <div class="country-name">Россия</div>
-    </div>
-  </a>
-  <!-- Дания -->
-  <a href="/denmark" class="country-card">
-    <div class="card-wrapper">
-      <img src="static/images/denmark.jpg" alt="Дания" />
-      <div class="country-name">Дания</div>
-    </div>
-  </a>
-  <!-- Германия -->
-  <a href="/germany" class="country-card">
-    <div class="card-wrapper">
-      <img src="static/images/germany.jpg" alt="Германия" />
-      <div class="country-name">Германия</div>
-    </div>
-  </a>
+    <button id="nextBtn">»</button>
 </div>
 
 <!-- Футер -->
 <div class="footer">
     © Aryan Tours. Все права защищены.
 </div>
+
+<script src="/static/js/carousel.js"></script>
 
 </body>
 </html>
