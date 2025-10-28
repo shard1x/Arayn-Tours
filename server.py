@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
-# Секретный ключ для сессий (замените на свой собственный ключ)
+# Секретный ключ для сессий
 app.secret_key = '9f0c4a7d2e7d4b8b9f0a6d7e8f0c4a7d2e7d4b8b9f0a6d7e8f0c4a7d2e7d4b8b'
 
 # Конфигурация Flask-Session
@@ -40,23 +40,6 @@ def about():
 def contacts():
     return render_template('contacts.html')
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    return render_template('register.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    return render_template('login.html')
-
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('home'))
-
 @app.route('/reviews')
 def reviews():
     return render_template('reviews.html')
@@ -84,6 +67,33 @@ def russia():
 @app.route('/germany')
 def germany():
     return render_template('germany.html')
+
+@app.route('/submit_application', methods=['POST'])
+def submit_application():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+
+        try:
+            conn = get_db_connection()
+            cur = conn.cursor()
+
+            # SQL-запрос для вставки данных в таблицу applications
+            cur.execute("INSERT INTO applications (name, email, phone) VALUES (%s, %s, %s)", (name, email, phone))
+
+            conn.commit()  # Подтверждаем изменения в базе данных
+            cur.close()
+            conn.close()
+
+            flash('Заявка успешно отправлена!', 'success')  # Сообщение об успехе
+            return redirect(url_for('choose_tour'))  # Перенаправляем на страницу choose_tour
+        except Exception as e:
+            print(f"Ошибка при работе с базой данных: {e}")
+            flash('Произошла ошибка при отправке заявки.', 'error')
+            return redirect(url_for('choose_tour'))
+
+    return redirect(url_for('choose_tour'))  # Если метод не POST, перенаправляем
 
 if __name__ == '__main__':
     app.run(debug=True)

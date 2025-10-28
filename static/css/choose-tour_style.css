@@ -1,87 +1,199 @@
 /* Базовые стили для тела страницы */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #1e2e2b; /* тёмно-зеленый фон */
-  color: #e0e0e0; /* светлый текст для контраста */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e2e2b;
+    color: #e0e0e0;
 }
 
 /* Обертка для всего контента, чтобы закрепить футер */
 .page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+/* Стили для заголовка "Каталог туров" */
+.catalog-title {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    transform: translateY(-50%);
+    font-size: 6em;
+    color: #fff;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Стили для описания */
+.catalog_info-title {
+    position: absolute;
+    top: 43%;
+    left: 10%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: #fff;
+    font-weight: bold;
+    z-index: 1;
 }
 
 /* Футер */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #2b4d23;
-  color: #fff;
-  font-size: 14px;
-  padding: 10px 0;
-  text-align: center;
-  z-index: 1000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2b4d23;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+    z-index: 1000;
 }
 
-/* Логотип - фиксирован */
+/* Логотип */
 .logo-link {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
 }
 .logo {
-  width: 50px;
-  height: auto;
+    width: 50px;
+    height: auto;
 }
 
-/* Универсальный скрыващий класс */
+/* Универсальный скрывающий класс */
 .hidden {
-  display: none;
+    display: none;
 }
 
-/* Центрирование и отступы для кнопок */
+/* Стили для кнопок навигации */
 .button-section {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
 }
 
 /* Основной контент */
 .content {
-  flex: 1;
-  padding: 20px;
+    flex: 1;
+    padding: 20px;
 }
 
 /* Стили для списка Hikes */
 #hikesList {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
 }
 #hikesList li {
-  margin: 5px 0;
+    margin: 5px 0;
 }
 
 /* Кнопки - стиль в тёмных тонах */
 button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
+    background-color: #388e3c;
+    transform: scale(1.05);
 }
 
+/* Стили для кнопки "Оставить заявку" */
+.application-button-container {
+    position: absolute;
+    top: 55%;
+    left: 10%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.application-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.application-button:hover {
+    background-color: #2980b9;
+}
+
+.application-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* Стили для формы заявки */
+.application-form {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+    z-index: 2;
+}
+
+.application-form input[type="text"],
+.application-form input[type="email"],
+.application-form input[type="tel"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.application-form button[type="submit"] {
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.application-form button[type="submit"]:hover {
+    background-color: #219653;
+}
+
+/* Стили для сообщений flash */
+.flash-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.flash-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

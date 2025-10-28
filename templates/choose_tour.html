@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<title>Подобрать тур</title>
-    <!-- Подключение внешнего CSS -->
-<link rel="stylesheet" href="/static/css/choose-tour_style.css" />
+    <meta charset="UTF-8" />
+    <title>Подобрать тур</title>
+    <link rel="stylesheet" href="/static/css/choose-tour_style.css" />
+    <script>
+        function toggleForm() {
+            var form = document.getElementById("applicationForm");
+            form.classList.toggle("hidden");
+        }
+    </script>
 </head>
 <body>
 
-<!-- Логотип в левом верхнем -->
-<a href="/" class="logo-link">
-  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
-</a>
+    <!-- Логотип -->
+    <a href="/" class="logo-link">
+        <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+    </a>
 
-<!-- Основной контент -->
-<div class="button-section">
+    <!-- Заголовок -->
+    <div class="catalog-title">КАТАЛОГ ТУРОВ</div>
 
-</div>
+    <!-- Описание -->
+    <div class="catalog_info-title">Планируйте свой идеальный маршрут<br>с нашими рекомендациями</div>
 
-<!-- Футер -->
-<div class="footer">
-    © Aryan Tours. Все права защищены.
-</div>
+    <!-- Кнопка "Оставить заявку" -->
+    <div class="application-button-container">
+        <button class="application-button" onclick="toggleForm()">
+            <img src="static/images/application-icon.png" alt="Заявка" class="application-icon">
+            Оставить заявку
+        </button>
+    </div>
+
+    <!-- Форма заявки (скрыта по умолчанию) -->
+    <div id="applicationForm" class="application-form hidden">
+        <h3>Оставьте вашу заявку</h3>
+        <form method="POST" action="/submit_application">
+            <input type="text" id="name" name="name" placeholder="Имя" required><br><br>
+            <input type="email" id="email" name="email" placeholder="Электронная почта" required><br><br>
+            <input type="tel" id="phone" name="phone" placeholder="Номер телефона" required><br><br>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <!-- Кнопки навигации -->
+    <div class="button-section">
+        <button onclick="location.href='/about'">О нас</button>
+        <button onclick="location.href='/contacts'">Контакты</button>
+        <button onclick="location.href='/choose_tour'">Отзывы</button>
+    </div>
+
+    <!-- Футер -->
+    <div class="footer">
+        © Aryan Tours. Все права защищены.
+    </div>
 
 </body>
 </html>
