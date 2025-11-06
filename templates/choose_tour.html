@@ -1,59 +1,72 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Подобрать тур</title>
-    <link rel="stylesheet" href="/static/css/choose-tour_style.css" />
-    <script>
-        function toggleForm() {
-            var form = document.getElementById("applicationForm");
-            form.classList.toggle("hidden");
-        }
-    </script>
+    <link rel="stylesheet" href="/static/css/choose-tour_style.css">
+    <link rel="stylesheet" href="/static/css/application_form.css">
+    <link rel="stylesheet" href="/static/css/notification.css">
 </head>
 <body>
-
-    <!-- Логотип -->
     <a href="/" class="logo-link">
-        <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+        <img src="/static/images/main-logo.png" alt="Логотип" class="logo" />
     </a>
-
-    <!-- Заголовок -->
     <div class="catalog-title">КАТАЛОГ ТУРОВ</div>
-
-    <!-- Описание -->
     <div class="catalog_info-title">Планируйте свой идеальный маршрут<br>с нашими рекомендациями</div>
 
-    <!-- Кнопка "Оставить заявку" -->
-    <div class="application-button-container">
-        <button class="application-button" onclick="toggleForm()">
-            <img src="static/images/application-icon.png" alt="Заявка" class="application-icon">
-            Оставить заявку
-        </button>
-    </div>
-
-    <!-- Форма заявки (скрыта по умолчанию) -->
-    <div id="applicationForm" class="application-form hidden">
-        <h3>Оставьте вашу заявку</h3>
-        <form method="POST" action="/submit_application">
-            <input type="text" id="name" name="name" placeholder="Имя" required><br><br>
-            <input type="email" id="email" name="email" placeholder="Электронная почта" required><br><br>
-            <input type="tel" id="phone" name="phone" placeholder="Номер телефона" required><br><br>
-            <button type="submit">Отправить</button>
-        </form>
-    </div>
-
+    <!-- Кнопка "Оставить заявку" с изображением -->
+    <button id="openApplicationFormBtn" class="application-button">
+        Оставить заявку
+        <img src="/static/images/arrow.png" alt="arrow" class="button-icon">
+    </button>
     <!-- Кнопки навигации -->
     <div class="button-section">
         <button onclick="location.href='/about'">О нас</button>
         <button onclick="location.href='/contacts'">Контакты</button>
-        <button onclick="location.href='/choose_tour'">Отзывы</button>
+        <button onclick="location.href='/reviews'">Отзывы</button>
+    </div>
+    <div id="applicationForm" class="application-form hidden">
+        <div class="form-content">
+            <span class="close-button" id="closeApplicationFormBtn">×</span>
+            <form action="/submit_application" method="post" id="applicationFormElem" novalidate>  <!-- Добавлен атрибут novalidate -->
+                <div class="form-group">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error-message" id="name-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Почта:</label>
+                    <input type="email" id="email" name="email" required>
+                     <div class="error-message" id="email-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Номер телефона:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
+                    <div class="error-message" id="phone-error"></div>
+                </div>
+
+                <button type="submit" id="submitBtn">Отправить</button>
+            </form>
+        </div>
+    </div>
+    <!-- Затемнение фона-->
+    <div id="overlay" class="overlay hidden"></div>
+
+    <!-- Уведомление об успешной отправке -->
+    <div id="successNotification" class="notification success">
+        Заявка успешно отправлена!
     </div>
 
-    <!-- Футер -->
+    <!-- Уведомление об ошибке -->
+    <div id="errorNotification" class="notification error">
+        Пожалуйста, заполните все поля формы.
+    </div>
+
     <div class="footer">
         © Aryan Tours. Все права защищены.
     </div>
-
+    <script src="/static/js/application_form.js"></script>
 </body>
 </html>

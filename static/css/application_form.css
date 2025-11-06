@@ -1,0 +1,108 @@
+/* application_form.css */
+
+.application-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2e4a41; /* Более приглушенный зеленый */
+    padding: 20px;
+    border-radius: 8px; /* Более мягкое скругление */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Улучшенная тень */
+    z-index: 1001;
+    width: 400px;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif; /* Явное указание шрифта */
+    box-sizing: border-box; /* Важно для учета padding в ширине */
+}
+
+.form-content {
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: -2px; /* Отступ больше, чтобы не прилипало к краю */
+    right: 5px;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 24px; /* Размер крестика чуть больше */
+    color: #95a5a6; /* Более мягкий цвет крестика */
+    transition: color 0.2s; /* Плавное изменение цвета при наведении */
+
+}
+.close-button:hover {
+    color: #e0e0e0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Более темный фон */
+    backdrop-filter: blur(8px); /* Большее размытие */
+    z-index: 1000;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px; /* Увеличенный отступ */
+    font-weight: 500; /* Полужирный шрифт для меток */
+    text-align: left; /* Выравнивание текста меток по левому краю */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    width: calc(100% - 20px); /* Учитываем отступ справа */
+    padding: 10px; /* Увеличенный отступ внутри полей */
+    margin-bottom: 5px; /* Большой отступ*/
+    margin-left: auto; /*Автоматические отступы слева и справа*/
+    margin-right: 20px; /*Отступ справа*/
+    border: none;        /*Убираем границу*/
+    border-radius: 6px;
+    background-color: #3d5c52; /**/
+    color: #e0e0e0;
+    transition: box-shadow 0.3s;
+    display: block;   /*Делаем блочным элементом, чтобы работали auto отступы*/
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+    outline: none; /* Убираем обводку при фокусе */
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5); /* Тень при фокусе*/
+}
+
+.application-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 12px 20px; /* Увеличенные отступы*/
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px; /* Больше шрифт*/
+    width: 100%;        /*На всю ширину*/
+}
+
+.application-form button[type="submit"]:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px); /* Небольшой подъем*/
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+input.error {
+  border: 1px solid red;
+}
