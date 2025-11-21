@@ -1,32 +1,49 @@
-import hashlib
 from flask import Flask, render_template, session, redirect, url_for, request, flash, jsonify
 from flask_session import Session
 import psycopg2
-from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-
-# Секретный ключ для сессий
 app.secret_key = '9f0c4a7d2e7d4b8b9f0a6d7e8f0c4a7d2e7d4b8b9f0a6d7e8f0c4a7d2e7d4b8b'
 
-# Конфигурация Flask-Session
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+# Конфигурация базы данных
+app.config['DB_HOST'] = 'localhost'
+app.config['DB_NAME'] = 'Aryan Tours'
+app.config['DB_USER'] = 'postgres'
+app.config['DB_PASSWORD'] = '1'
 
-# Параметры подключения к PostgreSQL
-DB_HOST = "localhost"
-DB_NAME = "Aryan Tours"
-DB_USER = "postgres"
-DB_PASS = "1"
 
 def get_db_connection():
-    return psycopg2.connect(
-        host=DB_HOST,
-        dbname=DB_NAME,
-        user=DB_USER,
-        password=DB_PASS
-    )
+    conn = psycopg2.connect(
+        host=app.config['DB_HOST'],
+        database=app.config['DB_NAME'],
+        user=app.config['DB_USER'],
+        password=app.config['DB_PASSWORD'])
+    return conn
+
+
+@app.route('/submit_application', methods=['POST'])
+def submit_application():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        try:
+            cur.execute("INSERT INTO applications (name, email, phone) VALUES (%s, %s, %s)",
+                        (name, email, phone))
+            conn.commit()
+            flash('Заявка успешно отправлена!', 'success')
+        except Exception as e:
+            conn.rollback()
+            flash(f'Ошибка отправки заявки: {str(e)}', 'error')
+        finally:
+            cur.close()
+            conn.close()
+
+        return render_template('choose_tour.html')
 
 @app.route('/')
 def home():
@@ -67,33 +84,6 @@ def russia():
 @app.route('/germany')
 def germany():
     return render_template('germany.html')
-
-@app.route('/submit_application', methods=['POST'])
-def submit_application():
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        phone = request.form['phone']
-
-        try:
-            conn = get_db_connection()
-            cur = conn.cursor()
-
-            # SQL-запрос для вставки данных в таблицу applications
-            cur.execute("INSERT INTO applications (name, email, phone) VALUES (%s, %s, %s)", (name, email, phone))
-
-            conn.commit()  # Подтверждаем изменения в базе данных
-            cur.close()
-            conn.close()
-
-            flash('Заявка успешно отправлена!', 'success')  # Сообщение об успехе
-            return redirect(url_for('choose_tour'))  # Перенаправляем на страницу choose_tour
-        except Exception as e:
-            print(f"Ошибка при работе с базой данных: {e}")
-            flash('Произошла ошибка при отправке заявки.', 'error')
-            return redirect(url_for('choose_tour'))
-
-    return redirect(url_for('choose_tour'))  # Если метод не POST, перенаправляем
 
 if __name__ == '__main__':
     app.run(debug=True)

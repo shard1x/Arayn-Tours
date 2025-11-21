@@ -14,21 +14,16 @@
     <div class="catalog-title">КАТАЛОГ ТУРОВ</div>
     <div class="catalog_info-title">Планируйте свой идеальный маршрут<br>с нашими рекомендациями</div>
 
-    <!-- Кнопка "Оставить заявку" с изображением -->
     <button id="openApplicationFormBtn" class="application-button">
         Оставить заявку
         <img src="/static/images/arrow.png" alt="arrow" class="button-icon">
     </button>
-    <!-- Кнопки навигации -->
-    <div class="button-section">
-        <button onclick="location.href='/about'">О нас</button>
-        <button onclick="location.href='/contacts'">Контакты</button>
-        <button onclick="location.href='/reviews'">Отзывы</button>
-    </div>
-    <div id="applicationForm" class="application-form hidden">
+
+     <!-- Форма заявки -->
+    <div id="applicationForm" class="application-form">
         <div class="form-content">
-            <span class="close-button" id="closeApplicationFormBtn">×</span>
-            <form action="/submit_application" method="post" id="applicationFormElem" novalidate>  <!-- Добавлен атрибут novalidate -->
+            <span id="closeApplicationFormBtn" class="close-button">×</span>
+            <form action="/submit_application" method="post">
                 <div class="form-group">
                     <label for="name">Имя:</label>
                     <input type="text" id="name" name="name" required>
@@ -36,33 +31,39 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Почта:</label>
+                    <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
                      <div class="error-message" id="email-error"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Номер телефона:</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
-                    <div class="error-message" id="phone-error"></div>
+                    <input type="tel" id="phone" name="phone" required>
+                     <div class="error-message" id="phone-error"></div>
                 </div>
 
-                <button type="submit" id="submitBtn">Отправить</button>
+                <button type="submit">Отправить</button>
             </form>
         </div>
     </div>
-    <!-- Затемнение фона-->
-    <div id="overlay" class="overlay hidden"></div>
 
-    <!-- Уведомление об успешной отправке -->
-    <div id="successNotification" class="notification success">
-        Заявка успешно отправлена!
+    <div id="overlay" class="overlay"></div>
+
+    <div class="button-section">
+        <button onclick="location.href='/about'">О нас</button>
+        <button onclick="location.href='/contacts'">Контакты</button>
+        <button onclick="location.href='/reviews'">Отзывы</button>
     </div>
 
-    <!-- Уведомление об ошибке -->
-    <div id="errorNotification" class="notification error">
-        Пожалуйста, заполните все поля формы.
-    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 
     <div class="footer">
         © Aryan Tours. Все права защищены.
