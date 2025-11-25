@@ -1,6 +1,6 @@
-from flask import Flask, render_template, session, redirect, url_for, request, flash, jsonify
-from flask_session import Session
+from flask import Flask, render_template, request, redirect, url_for, session
 import psycopg2
+from werkzeug.security import generate_password_hash, check_password_hash # Импортируем функции для работы с паролями
 
 app = Flask(__name__)
 app.secret_key = '9f0c4a7d2e7d4b8b9f0a6d7e8f0c4a7d2e7d4b8b9f0a6d7e8f0c4a7d2e7d4b8b'
@@ -47,7 +47,8 @@ def submit_application():
 
 @app.route('/')
 def home():
-    return render_template('main.html')
+    user_id = session.get('user_id') # Проверяем, авторизован ли пользователь
+    return render_template('main.html', user_id=user_id) # Передаем информацию в шаблон
 
 @app.route('/about')
 def about():
@@ -57,13 +58,98 @@ def about():
 def contacts():
     return render_template('contacts.html')
 
-@app.route('/reviews')
+@app.route('/reviews', methods=['GET', 'POST'])
 def reviews():
-    return render_template('reviews.html')
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    if request.method == 'POST':
+        if 'user_id' in session:  # Проверяем, авторизован ли пользователь
+            user_id = session['user_id']
+            text = request.form['text']
+            rating = int(request.form['rating'])
+            try:
+                cur.execute("INSERT INTO reviews (user_id, text, rating) VALUES (%s, %s, %s)",
+                            (user_id, text, rating))
+                conn.commit()
+                flash('Отзыв успешно добавлен!', 'success')
+            except Exception as e:
+                conn.rollback()
+                flash(f'Ошибка добавления отзыва: {str(e)}', 'error')
+            finally:
+                cur.close()
+                conn.close()
+                return redirect(url_for('reviews'))
+        else:
+            flash('Необходимо авторизоваться, чтобы оставить отзыв.', 'error')
+            return redirect(url_for('login'))
+
+    cur.execute("SELECT reviews.id, users.username, reviews.text, reviews.rating, reviews.date FROM reviews JOIN users ON reviews.user_id = users.id")
+    reviews = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    return render_template('reviews.html', reviews=reviews)
 
 @app.route('/choose_tour')
 def choose_tour():
     return render_template('choose_tour.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        hashed_password = generate_password_hash(password)
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+        try:
+            cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)",
+                        (username, email, hashed_password))
+            conn.commit()
+            cur.close()
+            conn.close()
+          #  flash('Регистрация прошла успешно!', 'success') # Отображаем сообщение об успехе
+            return redirect(url_for('login', succes="Регистрация прошла успешно"))  # Перенаправляем на страницу входа
+        except Exception as e:
+            print(e)
+            conn.rollback()
+            cur.close()
+            conn.close()
+          #  flash('Ошибка регистрации', 'error') # Отображаем сообщение об ошибке
+            return render_template('register.html', error="Ошибка регистрации")
+
+    return render_template('register.html', error=None) #Отображаем страницу регистрации без ошибок
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)  # Удаляем id пользователя из сессии
+    return redirect(url_for('home'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT id, password FROM users WHERE username = %s", (username,))
+        user = cur.fetchone()
+        cur.close()
+        conn.close()
+
+        if user and check_password_hash(user[1], password):
+            session['user_id'] = user[0]
+            return redirect(url_for('home'))
+        else:
+            flash("Неверные имя пользователя или пароль", 'error')
+            return render_template('login.html', error="Неверные имя пользователя или пароль")
+
+    return render_template('login.html', error=None)
 
 @app.route('/finland')
 def finland():

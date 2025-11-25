@@ -1,0 +1,37 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+          <!-- Подключение внешнего CSS -->
+<link rel="stylesheet" href="/static/css/login-register_style.css" />
+</head>
+<body>
+
+<!-- Логотип в левом верхнем -->
+<a href="/" class="logo-link">
+  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+</a>
+
+    <h2>Регистрация</h2>
+    <form method="post" action="/register">
+        <input type="text" name="username" placeholder="Имя пользователя"><br>
+        <input type="email" name="email" placeholder="Почта"><br>
+        <input type="password" name="password" placeholder="Пароль"><br>
+        <button type="submit">Зарегистрироваться</button>
+        <p>Уже зарегестированы? <a href="/login">Войти</a></p>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+
+<!-- Футер -->
+<div class="footer">
+    © Aryan Tours. Все права защищены.
+</div>
+
+</body>
+</html>

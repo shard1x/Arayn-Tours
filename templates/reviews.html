@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<title>Отзывы</title>
-    <!-- Подключение внешнего CSS -->
-<link rel="stylesheet" href="/static/css/reviews_style.css" />
+    <meta charset="UTF-8">
+    <title>Отзывы</title>
+    <link rel="stylesheet" href="/static/css/reviews_style.css">
 </head>
 <body>
+    <!-- Логотип, кнопки "Подобрать тур", "О нас", "Контакты" -->
 
-<!-- Логотип в левом верхнем -->
-<a href="/" class="logo-link">
-  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
-</a>
+    <h2>Отзывы</h2>
 
-<!-- Основной контент -->
-<div class="button-section">
-    <button onclick="location.href='/choose_tour'">Подобрать тур</button>
-    <button onclick="location.href='/about'">О нас</button>
-    <button onclick="location.href='/contacts'">Контакты</button>
-</div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
-<!-- Футер -->
-<div class="footer">
-    © Aryan Tours. Все права защищены.
-</div>
+    {% if session['user_id'] %}
+        <h3>Оставить отзыв</h3>
+        <form method="post" action="{{ url_for('reviews') }}">
+            <textarea name="text" placeholder="Ваш отзыв" required></textarea><br>
+            <select name="rating" required>
+                <option value="1">1 звезда</option>
+                <option value="2">2 звезды</option>
+                <option value="3">3 звезды</option>
+                <option value="4">4 звезды</option>
+                <option value="5">5 звезд</option>
+            </select><br>
+            <button type="submit">Отправить отзыв</button>
+        </form>
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Войдите</a> или <a href="{{ url_for('register') }}">зарегистрируйтесь</a>, чтобы оставить отзыв.</p>
+    {% endif %}
 
+    <h3>Существующие отзывы:</h3>
+    {% for review in reviews %}
+        <div class="review">
+            <p><b>{{ review[1] }}</b> ({{ review[4] }}): {{ review[2] }} - Оценка: {{ review[3] }}</p>
+        </div>
+    {% endfor %}
+
+    <!-- Футер -->
 </body>
 </html>
