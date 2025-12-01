@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash # Импортируем функции для работы с паролями
 
@@ -11,6 +11,10 @@ app.config['DB_NAME'] = 'Aryan Tours'
 app.config['DB_USER'] = 'postgres'
 app.config['DB_PASSWORD'] = '1'
 
+ADMIN_USERNAME = "ADMIN"
+ADMIN_EMAIL = "admin.ex@gmail.com"
+ADMIN_PASSWORD = "ADMIN14"
+
 
 def get_db_connection():
     conn = psycopg2.connect(
@@ -20,6 +24,8 @@ def get_db_connection():
         password=app.config['DB_PASSWORD'])
     return conn
 
+def is_admin():
+    return session.get('is_admin', False)
 
 @app.route('/submit_application', methods=['POST'])
 def submit_application():
@@ -47,8 +53,28 @@ def submit_application():
 
 @app.route('/')
 def home():
-    user_id = session.get('user_id') # Проверяем, авторизован ли пользователь
-    return render_template('main.html', user_id=user_id) # Передаем информацию в шаблон
+    user_id = session.get('user_id')
+    is_admin_flag = is_admin()  # Передаем признак админа в шаблон
+    return render_template('main.html', user_id=user_id, is_admin=is_admin_flag)
+
+@app.route('/delete_review/<int:review_id>')
+def delete_review(review_id):
+    if is_admin(): #Проверяем, является ли пользователь админом
+        conn = get_db_connection()
+        cur = conn.cursor()
+        try:
+            cur.execute("DELETE FROM reviews WHERE id = %s", (review_id,))
+            conn.commit()
+            flash('Отзыв успешно удален!', 'success')
+        except Exception as e:
+            conn.rollback()
+            flash(f'Ошибка удаления отзыва: {str(e)}', 'error')
+        finally:
+            cur.close()
+            conn.close()
+    else:
+        flash('У вас нет прав для удаления отзывов.', 'error')
+    return redirect(url_for('reviews'))
 
 @app.route('/about')
 def about():
@@ -58,13 +84,17 @@ def about():
 def contacts():
     return render_template('contacts.html')
 
+@app.route('/choose_tour')
+def choose_tour():
+    return render_template('choose_tour.html')
+
 @app.route('/reviews', methods=['GET', 'POST'])
 def reviews():
     conn = get_db_connection()
     cur = conn.cursor()
 
     if request.method == 'POST':
-        if 'user_id' in session:  # Проверяем, авторизован ли пользователь
+        if 'user_id' in session and not is_admin():
             user_id = session['user_id']
             text = request.form['text']
             rating = int(request.form['rating'])
@@ -89,11 +119,8 @@ def reviews():
     cur.close()
     conn.close()
 
-    return render_template('reviews.html', reviews=reviews)
-
-@app.route('/choose_tour')
-def choose_tour():
-    return render_template('choose_tour.html')
+    is_admin_flag = is_admin() # Передаем признак админа шаблону
+    return render_template('reviews.html', reviews=reviews, is_admin=is_admin_flag)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -126,7 +153,8 @@ def register():
 
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None)  # Удаляем id пользователя из сессии
+    session.pop('user_id', None)
+    session.pop('is_admin', None)
     return redirect(url_for('home'))
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -137,19 +165,40 @@ def login():
 
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute("SELECT id, password FROM users WHERE username = %s", (username,))
-        user = cur.fetchone()
+
+        if username == ADMIN_USERNAME:
+            # Проверка данных администратора
+            if password == ADMIN_PASSWORD:
+                session['user_id'] = -1  # Условный ID для админа
+                session['is_admin'] = True #  Устанавливаем флаг администратора
+                return redirect(url_for('home'))
+            else:
+                error = "Неверный пароль администратора"
+        else:
+            # Проверка обычного пользователя
+            cur.execute("SELECT id, password FROM users WHERE username = %s", (username,))
+            user = cur.fetchone()
+
+            if user and check_password_hash(user[1], password):
+                session['user_id'] = user[0]
+                session['is_admin'] = False
+                return redirect(url_for('home'))
+            else:
+                error = "Неверные имя пользователя или пароль"
+
         cur.close()
         conn.close()
 
-        if user and check_password_hash(user[1], password):
-            session['user_id'] = user[0]
-            return redirect(url_for('home'))
-        else:
-            flash("Неверные имя пользователя или пароль", 'error')
-            return render_template('login.html', error="Неверные имя пользователя или пароль")
-
+        return render_template('login.html', error=error)
     return render_template('login.html', error=None)
+
+@app.route('/profile')
+def profile():
+    user_id = session.get('user_id')
+    if user_id:
+        return render_template('profile.html') #Если авторизован - переходим в профиль
+    else:
+        return redirect(url_for('login')) #Если не авторизован - на страницу логина
 
 @app.route('/finland')
 def finland():

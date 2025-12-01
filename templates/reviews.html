@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="/static/css/reviews_style.css">
 </head>
 <body>
-    <!-- Логотип, кнопки "Подобрать тур", "О нас", "Контакты" -->
+<!-- Логотип в левом верхнем -->
+<a href="/" class="logo-link">
+  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+</a>
 
     <h2>Отзывы</h2>
 
@@ -39,9 +42,15 @@
     {% for review in reviews %}
         <div class="review">
             <p><b>{{ review[1] }}</b> ({{ review[4] }}): {{ review[2] }} - Оценка: {{ review[3] }}</p>
+             {% if is_admin %}
+                <a href="{{ url_for('delete_review', review_id=review[0]) }}">Удалить</a>
+                <!-- Добавьте ссылку на редактирование -->
+            {% endif %}
         </div>
     {% endfor %}
 
-    <!-- Футер -->
+    <div class="footer">
+        © Aryan Tours. Все права защищены.
+    </div>
 </body>
 </html>
