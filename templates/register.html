@@ -1,37 +1,43 @@
-<!-- register.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
-          <!-- Подключение внешнего CSS -->
-<link rel="stylesheet" href="/static/css/login-register_style.css" />
+    <!-- Подключение внешнего CSS -->
+    <link rel="stylesheet" href="/static/css/login-register_style.css" />
 </head>
 <body>
 
-<!-- Логотип в левом верхнем -->
+<!-- Видеофон -->
+<video autoplay muted loop id="background-video">
+    <source src="static/video/background-video.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+</video>
+
+<!-- Логотип в левом верхнем углу -->
 <a href="/" class="logo-link">
-  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+    <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
 </a>
 
-    <h2>Регистрация</h2>
+<!-- Контейнер для формы -->
+<div class="form-container">
     <form method="post" action="/register">
-        <input type="text" name="username" placeholder="Имя пользователя"><br>
+        <h2>Регистрация</h2>
+        <input type="text" name="username" placeholder="Логин"><br>
         <input type="email" name="email" placeholder="Почта"><br>
         <input type="password" name="password" placeholder="Пароль"><br>
         <button type="submit">Зарегистрироваться</button>
         <p>Уже зарегестированы? <a href="/login">Войти</a></p>
     </form>
-
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
-
+</div>
 
 <!-- Футер -->
 <div class="footer">
     © Aryan Tours. Все права защищены.
 </div>
+
+<!-- Подключение скрипта, если он есть -->
+<script src="/static/js/register_form.js"></script>
 
 </body>
 </html>

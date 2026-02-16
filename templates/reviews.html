@@ -8,8 +8,12 @@
 <body>
 <!-- Логотип в левом верхнем -->
 <a href="/" class="logo-link">
-  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+    <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
 </a>
+
+<div class="top-right-container">
+  <a href="/profile" class="profile-button">Профиль</a>
+</div>
 
     <h2>Отзывы</h2>
 
@@ -35,7 +39,9 @@
             <button type="submit">Отправить отзыв</button>
         </form>
     {% else %}
-        <p><a href="{{ url_for('login') }}">Войдите</a> или <a href="{{ url_for('register') }}">зарегистрируйтесь</a>, чтобы оставить отзыв.</p>
+        <div class="login-prompt">
+           <p><a href="{{ url_for('login') }}">Войдите</a> или <a href="{{ url_for('register') }}">зарегистрируйтесь</a>, чтобы оставить отзыв.</p>
+        </div>
     {% endif %}
 
     <h3>Существующие отзывы:</h3>
@@ -44,7 +50,7 @@
             <p><b>{{ review[1] }}</b> ({{ review[4] }}): {{ review[2] }} - Оценка: {{ review[3] }}</p>
              {% if is_admin %}
                 <a href="{{ url_for('delete_review', review_id=review[0]) }}">Удалить</a>
-                <!-- Добавьте ссылку на редактирование -->
+                <a href="{{ url_for('edit_review', review_id=review[0]) }}">Редактировать</a>
             {% endif %}
         </div>
     {% endfor %}

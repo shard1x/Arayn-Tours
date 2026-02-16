@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import psycopg2
-from werkzeug.security import generate_password_hash, check_password_hash # Импортируем функции для работы с паролями
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = '9f0c4a7d2e7d4b8b9f0a6d7e8f0c4a7d2e7d4b8b9f0a6d7e8f0c4a7d2e7d4b8b'
@@ -12,7 +12,7 @@ app.config['DB_USER'] = 'postgres'
 app.config['DB_PASSWORD'] = '1'
 
 ADMIN_USERNAME = "ADMIN"
-ADMIN_EMAIL = "admin.ex@gmail.com"
+ADMIN_EMAIL = ""
 ADMIN_PASSWORD = "ADMIN14"
 
 
@@ -54,12 +54,12 @@ def submit_application():
 @app.route('/')
 def home():
     user_id = session.get('user_id')
-    is_admin_flag = is_admin()  # Передаем признак админа в шаблон
+    is_admin_flag = is_admin()
     return render_template('main.html', user_id=user_id, is_admin=is_admin_flag)
 
 @app.route('/delete_review/<int:review_id>')
 def delete_review(review_id):
-    if is_admin(): #Проверяем, является ли пользователь админом
+    if is_admin():
         conn = get_db_connection()
         cur = conn.cursor()
         try:
@@ -75,6 +75,37 @@ def delete_review(review_id):
     else:
         flash('У вас нет прав для удаления отзывов.', 'error')
     return redirect(url_for('reviews'))
+
+@app.route('/edit_review/<int:review_id>', methods=['GET', 'POST'])
+def edit_review(review_id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    if request.method == 'GET':
+        cur.execute("SELECT text, rating FROM reviews WHERE id = %s", (review_id,))
+        review = cur.fetchone()
+
+        if review:
+            return render_template('edit_review.html', review_id=review_id, review=review)
+        else:
+            flash('Отзыв не найден.', 'error')
+            return redirect(url_for('reviews'))
+
+    elif request.method == 'POST':
+        text = request.form['text']
+        rating = int(request.form['rating'])
+
+        try:
+            cur.execute("UPDATE reviews SET text = %s, rating = %s WHERE id = %s", (text, rating, review_id))
+            conn.commit()
+            flash('Отзыв успешно обновлен!', 'success')
+        except Exception as e:
+            conn.rollback()
+            flash(f'Ошибка обновления отзыва: {str(e)}', 'error')
+        finally:
+            cur.close()
+            conn.close()
+        return redirect(url_for('reviews'))
 
 @app.route('/about')
 def about():
@@ -167,15 +198,13 @@ def login():
         cur = conn.cursor()
 
         if username == ADMIN_USERNAME:
-            # Проверка данных администратора
             if password == ADMIN_PASSWORD:
-                session['user_id'] = -1  # Условный ID для админа
-                session['is_admin'] = True #  Устанавливаем флаг администратора
+                session['user_id'] = -1
+                session['is_admin'] = True
                 return redirect(url_for('home'))
             else:
                 error = "Неверный пароль администратора"
         else:
-            # Проверка обычного пользователя
             cur.execute("SELECT id, password FROM users WHERE username = %s", (username,))
             user = cur.fetchone()
 
@@ -196,9 +225,9 @@ def login():
 def profile():
     user_id = session.get('user_id')
     if user_id:
-        return render_template('profile.html') #Если авторизован - переходим в профиль
+        return render_template('profile.html')
     else:
-        return redirect(url_for('login')) #Если не авторизован - на страницу логина
+        return redirect(url_for('login'))
 
 @app.route('/finland')
 def finland():

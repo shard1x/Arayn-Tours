@@ -1,32 +1,109 @@
-/* Базовые стили для тела страницы */
+/* Общие стили */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #1e2e2b; /* тёмно-зеленый фон */
-  color: #e0e0e0; /* светлый текст для контраста */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e2e2b;
+    color: #e0e0e0;
+    display: flex; /* Используем flexbox для компоновки */
+    flex-direction: column; /* Располагаем элементы вертикально */
+    min-height: 100vh; /* Минимальная высота - 100% высоты экрана */
 }
 
-/* Обертка для всего контента */
+/* Контейнер для кнопок на баннере */
+.top-buttons-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
+    display: flex;
+    gap: 10px;
+}
+
+/* Баннер */
+.banner {
+    background-image: url('/static/images/main-banner1 = NONE.jpg'); /* Укажите путь к вашей картинке! */
+    background-size: cover;
+    height: 1000px; /* Высота баннера */
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+    align-items: center; /* Выравнивание по центру */
+    justify-content: space-around; /* Равномерное распределение места между элементами */
+    padding: 20px 50px; /* Уменьшены отступы, добавлено по бокам */
+    box-sizing: border-box;
+    position: relative;
+}
+
+.banner-content {
+    text-align: center; /* Центрирование текста */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.banner h1 {
+    color: white;
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.banner-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    margin-top: 20px;  /* Добавили отступ сверху */
+}
+/* Общие стили для кнопок */
+button {
+    background-color: #4CAF50; /* Зеленый цвет */
+    color: #fff;                /* Белый текст */
+    border: none;                /* Убираем рамку */
+    padding: 10px 15px;         /* Отступы */
+    border-radius: 4px;         /* Закругленные углы */
+    cursor: pointer;            /* Меняем вид курсора при наведении */
+    transition: background-color 0.3s, transform 0.2s; /* Плавные переходы */
+    font-size: 14px;              /* Размер шрифта */
+}
+
+button:hover {
+    background-color: #388e3c; /* Немного темнее при наведении */
+    transform: scale(1.05);    /* Увеличение при наведении */
+}
+
+/* Фон стран */
+.country-section {
+    /*background-color: rgba(0, 0, 0, 0.5); /* Цвет фона с прозрачностью */
+    padding: 20px;
+    text-align: center;
+    width: 100%; /*  Увеличиваем ширину блока стран */
+    margin: 0 auto; /*  Центрируем блок стран */
+    border-radius: 10px; /*  Добавим скругление углов */
+    margin-top: 50px  /*  Отступ сверху */
+}
+
+/* Базовые стили для тела страницы */
 .page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 80px; /* чтобы футер не перекрывался */
+  flex: 1; /* Занимает все доступное пространство, "толкает" футер вниз */
+  padding: 20px;
 }
 
 /* Футер */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
   background-color: #2b4d23;
   color: #fff;
   font-size: 14px;
   padding: 10px 0;
   text-align: center;
   z-index: 1000;
+  width: 100%;
+  margin-top: auto; /* Прижимает футер к низу */
 }
 
 /* Логотип */
@@ -34,10 +111,10 @@ body {
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 1000;
+  z-index: 1002; /* убедитесь, что лого над кнопками */
 }
 .logo {
-  width: 50px;
+  width: 150px;
   height: auto;
 }
 
@@ -47,7 +124,7 @@ body {
 }
 
 /* Центрирование и отступы для кнопок */
-.button-section {
+.button-section { /* можно удалить т.к. не используется */
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -55,35 +132,19 @@ body {
 }
 
 /* Основной контент */
-.content {
+.content { /* можно удалить */
   flex: 1;
   padding: 20px;
 }
 
 /* Стили для списка Hikes */
-#hikesList {
+#hikesList { /* можно удалить */
   list-style: none;
   padding: 0;
   margin-top: 10px;
 }
 #hikesList li {
   margin: 5px 0;
-}
-
-/* Кнопки - стиль в тёмных тонах */
-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  font-size: 14px;
-}
-button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
 }
 
 /* Карусель */
@@ -96,13 +157,13 @@ button:hover {
 
 /* контейнер для отображения одной карточки */
 .carousel-container {
-  width: 320px; /*  Увеличиваем ширину контейнера*/
+  width: 600px; /*  Увеличиваем ширину контейнера*/
   overflow: hidden;
   border: 2px solid #555;
   border-radius: 8px;
   margin: 0 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  height: 220px; /* чуть больше высоты карточки для кнопок */
+  height: 400px; /* чуть больше высоты карточки для кнопок */
   position: relative;
 }
 
@@ -114,9 +175,9 @@ button:hover {
 
 /* стиль карточки страны */
 .country-card {
-  flex: 0 0 300px; /* фикс ширина для каждой карточки */
+  flex: 0 0 600px; /* фикс ширина для каждой карточки */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* располагаем изображение и название вертикально */
   border: 1px solid #444;
   border-radius: 8px;
   overflow: hidden;
@@ -124,6 +185,7 @@ button:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
   box-sizing: border-box;
   margin: 0;
+  position: relative; /* Добавляем position relative */
 }
 
 /* разворот карточки при наведении */
@@ -133,10 +195,11 @@ button:hover {
 }
 
 /* изображение */
-.card-content img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+.card-wrapper img {
+  width: 100%; /* ширина на всю карточку */
+  height: 400px; /* высота как в задании */
+  object-fit: cover; /* изображение заполнит контейнер, сохраняя пропорции */
+  display: block; /* Убираем возможный отступ снизу изображения */
 }
 
 /* название страны */
@@ -144,11 +207,16 @@ button:hover {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  margin-top: 10px;
   padding: 8px 12px;
   background-color: rgba(30, 46, 43, 0.3);
   border-radius: 4px;
-  color: #fff;
+  color: #fff; /* Светлый цвет текста для контраста */
+  position: absolute; /* Меняем на absolute */
+  bottom: 0; /* Прижимаем к низу */
+  left: 0; /* Прижимаем к левому краю */
+  width: 100%; /* Растягиваем на всю ширину */
+  z-index: 2; /* Убеждаемся, что текст поверх других элементов */
+  box-sizing: border-box; /* Важно для правильного расчета ширины с учетом padding */
 }
 
 /* Добавляем контейнер для элементов в правом верхнем углу */
@@ -156,7 +224,7 @@ button:hover {
   position: fixed;
   top: 10px;
   right: 10px;
-  z-index: 1000;
+  z-index: 1000;/* не нужно менять */
   display: flex; /* Используем flex для выравнивания элементов */
   align-items: center; /* Выравниваем элементы по вертикали */
 }
@@ -184,5 +252,18 @@ button:hover {
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 1000;
+  z-index: 1002;/* убедитесь, что лого над кнопками */
+}
+
+* Добавляем класс для заголовка "Arya Tours" */
+.banner h1.arya-tours {
+    position: absolute; /* Абсолютное позиционирование */
+    top: auto;          /* Сбрасываем вернхее значение auto  */
+    bottom: 200px;       /* Размещаем над блоком стран, регулируйте значение */
+    left: 50%;           /* Центрируем по горизонтали */
+    transform: translateX(-50%); /* Корректируем для точного центрирования */
+    width: 100%;          /* Занимает всю ширину баннера */
+    text-align: center;   /* Выравнивание текста по центру */
+    margin: 0;           /* Убираем лишние отступы */
+    z-index: 10;          /* Устанавливаем z-index больше, чем у фона  */
 }

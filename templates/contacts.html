@@ -3,17 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <title>Контакты</title>
-    <!-- Подключение внешнего CSS -->
 <link rel="stylesheet" href="/static/css/contacts_style.css" />
 </head>
 <body>
 
-<!-- Логотип в левом верхнем -->
+<!-- Логотип -->
 <a href="/" class="logo-link">
-  <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+    <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
 </a>
 
-<!-- Основной контент -->
+<!-- Кнопка профиля -->
+<div class="top-right-container">
+  <a href="/profile" class="profile-button">Профиль</a>
+</div>
+
+<!-- Секция с кнопками -->
 <div class="button-section">
     <button onclick="location.href='/choose_tour'">Подобрать тур</button>
     <button onclick="location.href='/about'">О нас</button>

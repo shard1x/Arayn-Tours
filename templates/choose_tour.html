@@ -9,14 +9,24 @@
 </head>
 <body>
     <a href="/" class="logo-link">
-        <img src="/static/images/main-logo.png" alt="Логотип" class="logo" />
+        <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
     </a>
+
+    <!-- Видеофон -->
+<video autoplay muted loop id="background-video">
+    <source src="static/video/background-video.mp4" type="video/mp4">
+</video>
+
+    <div class="top-right-container">
+        <a href="/profile" class="profile-button">Профиль</a>
+    </div>
+
     <div class="catalog-title">КАТАЛОГ ТУРОВ</div>
     <div class="catalog_info-title">Планируйте свой идеальный маршрут<br>с нашими рекомендациями</div>
 
     <button id="openApplicationFormBtn" class="application-button">
         Оставить заявку
-        <img src="/static/images/arrow.png" alt="arrow" class="button-icon">
+        <img src="/static/images/application-logo.png" alt="arrow" class="button-icon">
     </button>
 
      <!-- Форма заявки -->
@@ -68,6 +78,8 @@
     <div class="footer">
         © Aryan Tours. Все права защищены.
     </div>
+
     <script src="/static/js/application_form.js"></script>
+
 </body>
 </html>

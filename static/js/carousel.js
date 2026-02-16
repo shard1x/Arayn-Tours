@@ -1,30 +1,34 @@
+// carousel.js
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const cardsWrapper = document.getElementById('cardsWrapper');
-const cardWidth = 300; // Ширина одной карточки (включая margin).  Важно!
+// Получаем ширину карточки из CSS (включая margin)
+const cardWidth = document.querySelector('.country-card').offsetWidth;
 let currentPosition = 0;
+const cardCount = cardsWrapper.children.length; // Количество карточек
 
 nextBtn.addEventListener('click', () => {
-    const maxPosition = (cardsWrapper.children.length - 1) * cardWidth;  // Максимальная позиция прокрутки
-    if (currentPosition < maxPosition) {
-        currentPosition += cardWidth;
-        cardsWrapper.style.transform = `translateX(-${currentPosition}px)`;
+    // Если не последняя карточка
+    if (currentPosition < cardCount - 1) {
+        currentPosition++; // Увеличиваем текущую позицию на 1
+        // Сдвигаем wrapper на ширину одной карточки влево
+        cardsWrapper.style.transform = `translateX(-${currentPosition * cardWidth}px)`;
     } else {
-        // Если достигли конца, можно вернуться к началу (зациклить)
+        // Если последняя, возвращаемся к началу
         currentPosition = 0;
         cardsWrapper.style.transform = `translateX(0)`;
     }
 });
 
 prevBtn.addEventListener('click', () => {
+    // Если не первая карточка
     if (currentPosition > 0) {
-        currentPosition -= cardWidth;
-        cardsWrapper.style.transform = `translateX(-${currentPosition}px)`;
+        currentPosition--; // Уменьшаем текущую позицию на 1
+        // Сдвигаем wrapper на ширину одной карточки вправо
+        cardsWrapper.style.transform = `translateX(-${currentPosition * cardWidth}px)`;
     } else {
-        // Если в начале, можно перейти к концу (зациклить)
-         const maxPosition = (cardsWrapper.children.length - 1) * cardWidth;
-         currentPosition = maxPosition;
-         cardsWrapper.style.transform = `translateX(-${currentPosition}px)`;
-
+        // Если первая, переходим к последней карточке
+        currentPosition = cardCount - 1; // Индекс последней карточки
+        cardsWrapper.style.transform = `translateX(-${currentPosition * cardWidth}px)`;
     }
 });

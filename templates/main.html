@@ -3,74 +3,73 @@
 <head>
     <meta charset="UTF-8" />
     <title>Главная страница</title>
-    <!-- Подключение внешнего CSS -->
     <link rel="stylesheet" href="/static/css/style.css" />
 </head>
 <body>
 
-<!-- Логотип в левом верхнем -->
+<!-- Логотип -->
 <a href="/" class="logo-link">
-    <img src="static/images/main-logo.png" alt="Логотип" class="logo" />
+    <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
 </a>
 
+<!-- Кнопка Профиль -->
 <div class="top-right-container">
-  <a href="/profile" class="profile-button">Профиль</a>
+    <a href="/profile" class="profile-button">Профиль</a>
 </div>
 
-<!-- Основной контент -->
-<div class="button-section">
-    <button onclick="location.href='/choose_tour'">Подобрать тур</button>
+<!-- Кнопки "О нас", "Контакты", "Отзывы" -->
+<div class="top-buttons-container">
     <button onclick="location.href='/about'">О нас</button>
     <button onclick="location.href='/contacts'">Контакты</button>
     <button onclick="location.href='/reviews'">Отзывы</button>
-    <ul id="hikesList" class="hidden">
-        <li><a href="/finland">Финляндия</a></li>
-        <li><a href="/sweden">Швеция</a></li>
-        <li><a href="/norway">Норвегия</a></li>
-        <li><a href="/karelia">Республика Карелия</a></li>
-        <li><a href="/germany">Германия</a></li>
-    </ul>
 </div>
 
-<!-- Раздел со странами -->
-<div class="carousel-wrapper">
-    <button id="prevBtn">«</button>
-    <div class="carousel-container">
-        <div class="cards-wrapper" id="cardsWrapper">
-            <!-- Ваши карточки начинаются здесь -->
-            <a href="/finland" class="country-card">
-                <div class="card-wrapper">
-                    <img src="static/images/finland.jpg" alt="Финляндия" />
-                    <div class="country-name">Финляндия</div>
+<!-- Баннер -->
+<div class="banner">
+
+     <!-- Карусель стран -->
+    <div class="country-section">
+        <div class="carousel-wrapper">
+            <button id="prevBtn">«</button>
+            <div class="carousel-container">
+                <div class="cards-wrapper" id="cardsWrapper">
+                    <a href="/finland" class="country-card">
+                        <div class="card-wrapper">
+                            <img src="static/images/finland-card.jpg" alt="Финляндия" />
+                            <div class="country-name">Финляндия</div>
+                        </div>
+                    </a>
+                    <a href="/sweden" class="country-card">
+                        <div class="card-wrapper">
+                            <img src="static/images/sweden-card.jpg" alt="Швеция" />
+                            <div class="country-name">Швеция</div>
+                        </div>
+                    </a>
+                    <a href="/norway" class="country-card">
+                        <div class="card-wrapper">
+                            <img src="static/images/norway-card.jpg" alt="Норвегия" />
+                            <div class="country-name">Норвегия</div>
+                        </div>
+                    </a>
+                    <a href="/karelia" class="country-card">
+                        <div class="card-wrapper">
+                            <img src="static/images/karelia-card.jpg" alt="Карелия" />
+                            <div class="country-name">Карелия</div>
+                        </div>
+                    </a>
+                    <a href="/germany" class="country-card">
+                        <div class="card-wrapper">
+                            <img src="static/images/germany-card.jpg" alt="Германия" />
+                            <div class="country-name">Германия</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="/sweden" class="country-card">
-                <div class="card-wrapper">
-                    <img src="static/images/sweden.jpg" alt="Швеция" />
-                    <div class="country-name">Швеция</div>
-                </div>
-            </a>
-            <a href="/norway" class="country-card">
-                <div class="card-wrapper">
-                    <img src="static/images/norway.jpg" alt="Норвегия" />
-                    <div class="country-name">Норвегия</div>
-                </div>
-            </a>
-            <a href="/karelia" class="country-card">
-                <div class="card-wrapper">
-                    <img src="static/images/krelia.jpg" alt="Республика Карелия" />
-                    <div class="country-name">Республика карелия</div>
-                </div>
-            </a>
-            <a href="/germany" class="country-card">
-                <div class="card-wrapper">
-                    <img src="static/images/germany.jpg" alt="Германия" />
-                    <div class="country-name">Германия</div>
-                </div>
-            </a>
+            </div>
+            <button id="nextBtn">»</button>
         </div>
+          <button class="banner-button" onclick="location.href='/choose_tour'">Подобрать тур</button>
     </div>
-    <button id="nextBtn">»</button>
+
 </div>
 
 <!-- Футер -->
@@ -79,6 +78,5 @@
 </div>
 
 <script src="/static/js/carousel.js"></script>
-
 </body>
 </html>

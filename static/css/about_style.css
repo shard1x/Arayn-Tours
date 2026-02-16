@@ -37,7 +37,7 @@ body {
   z-index: 1000;
 }
 .logo {
-  width: 50px;
+  width: 150px;
   height: auto;
 }
 
@@ -85,3 +85,38 @@ button:hover {
   transform: scale(1.05);
 }
 
+/* Добавляем контейнер для элементов в правом верхнем углу */
+.top-right-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  display: flex; /* Используем flex для выравнивания элементов */
+  align-items: center; /* Выравниваем элементы по вертикали */
+}
+
+/* Стили для кнопки профиля */
+.profile-button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 14px;
+  margin-left: 10px; /* Добавляем отступ слева от кнопки */
+}
+
+.profile-button:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
+
+/* Корректируем позиционирование логотипа для избежания перекрытия */
+.logo-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}

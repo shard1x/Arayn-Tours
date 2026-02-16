@@ -1,87 +1,119 @@
-/* Базовые стили для тела страницы */
+/* Общие стили */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #1e2e2b; /* тёмно-зеленый фон */
-  color: #e0e0e0; /* светлый текст для контраста */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e2e2b; /* Темно-зеленый фон */
+    color: #e0e0e0; /* Светлый текст */
 }
 
-/* Обертка для всего контента, чтобы закрепить футер */
 .page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Занимает всю высоту экрана */
+}
+
+.content {
+    flex: 1; /* Растягивает контент, чтобы футер был внизу */
+    padding: 20px;
+}
+
+/* Заголовок */
+h2, h3 {
+    text-align: center;
+    color: #fff;
+}
+
+/* Форма отзыва */
+form {
+    margin: 20px auto;
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+}
+textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    background-color: #444;
+    color: #fff;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+/* Отзывы */
+.review {
+    background-color: #333;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.review p {
+    margin: 0;
 }
 
 /* Футер */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #2b4d23;
-  color: #fff;
-  font-size: 14px;
-  padding: 10px 0;
-  text-align: center;
-  z-index: 1000;
+    background-color: #2b4d23;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
-/* Логотип - фиксирован */
+/* Логотип */
 .logo-link {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
 }
+
 .logo {
-  width: 50px;
-  height: auto;
+    width: 150px;
+    height: auto;
 }
 
-/* Универсальный скрыващий класс */
-.hidden {
-  display: none;
+/* Кнопка профиля */
+.top-right-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
 }
 
-/* Центрирование и отступы для кнопок */
-.button-section {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
+.profile-button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-/* Основной контент */
-.content {
-  flex: 1;
-  padding: 20px;
+/* Сообщение о входе */
+.login-prompt {
+    text-align: center;
+    margin-top: 50px;
 }
-
-/* Стили для списка Hikes */
-#hikesList {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
-}
-#hikesList li {
-  margin: 5px 0;
-}
-
-/* Кнопки - стиль в тёмных тонах */
-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
-}
-
