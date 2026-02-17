@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="/static/css/reviews_style.css">
 </head>
 <body>
+
 <!-- Логотип в левом верхнем -->
-<a href="/" class="logo-link">
+<a href="http://localhost:5000/" class="logo-link">
     <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
 </a>
 
@@ -15,48 +16,50 @@
   <a href="/profile" class="profile-button">Профиль</a>
 </div>
 
-    <h2>Отзывы</h2>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    {% if session['user_id'] %}
-        <h3>Оставить отзыв</h3>
-        <form method="post" action="{{ url_for('reviews') }}">
-            <textarea name="text" placeholder="Ваш отзыв" required></textarea><br>
-            <select name="rating" required>
-                <option value="1">1 звезда</option>
-                <option value="2">2 звезды</option>
-                <option value="3">3 звезды</option>
-                <option value="4">4 звезды</option>
-                <option value="5">5 звезд</option>
-            </select><br>
-            <button type="submit">Отправить отзыв</button>
-        </form>
-    {% else %}
-        <div class="login-prompt">
-           <p><a href="{{ url_for('login') }}">Войдите</a> или <a href="{{ url_for('register') }}">зарегистрируйтесь</a>, чтобы оставить отзыв.</p>
-        </div>
+<h2>Отзывы</h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
     {% endif %}
+{% endwith %}
 
-    <h3>Существующие отзывы:</h3>
-    {% for review in reviews %}
-        <div class="review">
-            <p><b>{{ review[1] }}</b> ({{ review[4] }}): {{ review[2] }} - Оценка: {{ review[3] }}</p>
-             {% if is_admin %}
-                <a href="{{ url_for('delete_review', review_id=review[0]) }}">Удалить</a>
-                <a href="{{ url_for('edit_review', review_id=review[0]) }}">Редактировать</a>
-            {% endif %}
-        </div>
-    {% endfor %}
-
-    <div class="footer">
-        © Aryan Tours. Все права защищены.
+{% if session['user_id'] %}
+    <h3>Оставить отзыв</h3>
+    <form method="post" action="{{ url_for('reviews') }}">
+        <textarea name="text" placeholder="Ваш отзыв" required></textarea><br>
+        <select name="rating" required>
+            <option value="1">1 звезда</option>
+            <option value="2">2 звезды</option>
+            <option value="3">3 звезды</option>
+            <option value="4">4 звезды</option>
+            <option value="5">5 звезд</option>
+        </select><br>
+        <button type="submit">Отправить отзыв</button>
+    </form>
+{% else %}
+    <div class="login-prompt">
+       <p>
+         <a href="http://localhost:5002/login">Войдите</a> или
+         <a href="http://localhost:5002/register">зарегистрируйтесь</a>, чтобы оставить отзыв.
+       </p>
     </div>
+{% endif %}
+
+<h3>Существующие отзывы:</h3>
+{% for review in reviews %}
+    <div class="review">
+        <p><b>{{ review[1] }}</b> ({{ review[4] }}): {{ review[2] }} - Оценка: {{ review[3] }}</p>
+         {% if is_admin %}
+            <a href="{{ url_for('delete_review', review_id=review[0]) }}">Удалить</a>
+            <a href="{{ url_for('edit_review', review_id=review[0]) }}">Редактировать</a>
+        {% endif %}
+    </div>
+{% endfor %}
+
+<div class="footer">
+    © Aryan Tours. Все права защищены.
+</div>
 </body>
 </html>
