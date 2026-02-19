@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import psycopg2
+from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -10,10 +11,18 @@ app.config['DB_NAME'] = 'Aryan Tours'
 app.config['DB_USER'] = 'postgres'
 app.config['DB_PASSWORD'] = '1'
 
+CORS(app)
+
 ADMIN_USERNAME = "ADMIN"
 ADMIN_EMAIL = ""
 ADMIN_PASSWORD = "ADMIN14"
 
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  return response
 
 def get_db_connection():
     conn = psycopg2.connect(
@@ -26,13 +35,32 @@ def get_db_connection():
 def is_admin():
     return session.get('is_admin', False)
 
+@app.route('/')
+def index():
+    return redirect('http://localhost:5000/')
+
 @app.route('/profile')
 def profile():
     user_id = session.get('user_id')
-    if user_id:
-        return render_template('profile.html')
-    else:
+    if not user_id:
         return redirect(url_for('login'))
+
+    if user_id == -1:  # админ
+        # Передаем в шаблон флаг is_admin=True, чтобы показать другое сообщение
+        return render_template('profile.html', is_admin=True)
+
+    # Для обычного пользователя получаем данные из базы
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT username, email FROM users WHERE id = %s", (user_id,))
+    user_row = cur.fetchone()
+    cur.close()
+    conn.close()
+    if not user_row:
+        return redirect(url_for('login'))
+
+    user_data = {'username': user_row[0], 'email': user_row[1]}
+    return render_template('profile.html', user=user_data, is_admin=False)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -81,6 +109,9 @@ def login():
             if password == ADMIN_PASSWORD:
                 session['user_id'] = -1
                 session['is_admin'] = True
+                print(
+                    'admin redirect'
+                )
                 return redirect('http://localhost:5000/')
             else:
                 error = "Неверный пароль администратора"
@@ -91,6 +122,7 @@ def login():
             if user and check_password_hash(user[1], password):
                 session['user_id'] = user[0]
                 session['is_admin'] = False
+                print('user redirect')
                 return redirect('http://localhost:5000/')
             else:
                 error = "Неверные имя пользователя или пароль"

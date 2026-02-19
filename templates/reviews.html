@@ -13,53 +13,77 @@
 </a>
 
 <div class="top-right-container">
-  <a href="/profile" class="profile-button">Профиль</a>
+  <a href="http://localhost:5002/profile" class="profile-button">Профиль</a>
 </div>
 
-<h2>Отзывы</h2>
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+<div class="page-container">
+    <div class="content">
 
-{% if session['user_id'] %}
-    <h3>Оставить отзыв</h3>
-    <form method="post" action="{{ url_for('reviews') }}">
-        <textarea name="text" placeholder="Ваш отзыв" required></textarea><br>
-        <select name="rating" required>
-            <option value="1">1 звезда</option>
-            <option value="2">2 звезды</option>
-            <option value="3">3 звезды</option>
-            <option value="4">4 звезды</option>
-            <option value="5">5 звезд</option>
-        </select><br>
-        <button type="submit">Отправить отзыв</button>
-    </form>
-{% else %}
-    <div class="login-prompt">
-       <p>
-         <a href="http://localhost:5002/login">Войдите</a> или
-         <a href="http://localhost:5002/register">зарегистрируйтесь</a>, чтобы оставить отзыв.
-       </p>
-    </div>
-{% endif %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-<h3>Существующие отзывы:</h3>
-{% for review in reviews %}
-    <div class="review">
-        <p><b>{{ review[1] }}</b> ({{ review[4] }}): {{ review[2] }} - Оценка: {{ review[3] }}</p>
-         {% if is_admin %}
-            <a href="{{ url_for('delete_review', review_id=review[0]) }}">Удалить</a>
-            <a href="{{ url_for('edit_review', review_id=review[0]) }}">Редактировать</a>
+        {% if session['user_id'] %}
+            <h3>Оставьте ваш ценный отзыв</h3>
+            <form method="post" action="{{ url_for('reviews') }}">
+                <textarea name="text" placeholder="Что вы хотите сказать? Поделитесь впечатлениями..." required></textarea><br>
+                <select name="rating" required>
+                    <option value="" disabled selected>Выберите оценку</option>
+                    <option value="5">★★★★★ 5 звезд</option>
+                    <option value="4">★★★★☆ 4 звезды</option>
+                    <option value="3">★★★☆☆ 3 звезды</option>
+                    <option value="2">★★☆☆☆ 2 звезды</option>
+                    <option value="1">★☆☆☆☆ 1 звезда</option>
+                </select><br>
+                <button type="submit">Отправить отзыв</button>
+            </form>
+        {% else %}
+            <div class="login-prompt">
+               <p>
+                 Пожалуйста, <a href="http://localhost:5002/login">войдите</a> или <a href="http://localhost:5002/register">зарегистрируйтесь</a>, чтобы оставить свой отзыв.
+               </p>
+            </div>
         {% endif %}
-    </div>
-{% endfor %}
 
-<div class="footer">
-    © Aryan Tours. Все права защищены.
+        <h3>Что говорят о нас:</h3>
+        <div id="reviews-list">
+            {% for review in reviews %}
+                <div class="review">
+                    <p><span class="review-author"><b>{{ review[1] }}</b></span> (<span style="color: #aaa;">{{ review[4] }}</span>):</p>
+                    <p>{{ review[2] }}</p>
+                    <p>Оценка:
+                        {# Отображаем звезды на основе рейтинга #}
+                        <span class="star-rating">
+                            {% set rating = review[3] %}
+                            {# Полные звезды #}
+                            {% for _ in range(rating) %}
+                                ★
+                            {% endfor %}
+                            {# Пустые звезды #}
+                            {% for _ in range(5 - rating) %}
+                                <span class="empty">★</span>
+                            {% endfor %}
+                        </span>
+                    </p>
+                    {% if is_admin %}
+                        <div style="margin-top: 10px;">
+                            <a href="{{ url_for('delete_review', review_id=review[0]) }}" style="color: #dc3545;">Удалить</a> |
+                            <a href="{{ url_for('edit_review', review_id=review[0]) }}" style="color: #17a2b8;">Редактировать</a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="footer">
+        © Aryan Tours. Все права защищены.
+    </div>
 </div>
+
 </body>
 </html>

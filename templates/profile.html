@@ -6,15 +6,23 @@
 </head>
 <body>
     <div class="page-container">
-        <a href="/" class="logo-link">
+        <a href="http://localhost:5000/" class="logo-link">
             <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
         </a>
 
         <div class="content">
-            <section id="profile-info">
-                <h1>Страница профиля</h1>
-                <p>Здесь будет информация о пользователе (имя, email и т.д.)</p>
-            </section>
+            {% if is_admin %}
+                <section id="admin-info">
+                    <h1>Страница администратора</h1>
+                    <p>Просмотр профиля недоступен для администратора.</p>
+                </section>
+            {% else %}
+                <section id="profile-info">
+                    <h1>Страница профиля</h1>
+                    <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                </section>
+            {% endif %}
 
             <section id="user-actions">
                 <a href="{{ url_for('logout') }}" class="button">Выйти</a>

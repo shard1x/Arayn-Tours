@@ -1,71 +1,64 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Функция для валидации формы регистрации
   function validateForm() {
-    const username = document.querySelector('input[name="username"]').value;
-    const email = document.querySelector('input[name="email"]').value;
-    const password = document.querySelector('input[name="password"]').value;
+    const usernameInput = document.querySelector('input[name="username"]');
+    const emailInput = document.querySelector('input[name="email"]');
+    const passwordInput = document.querySelector('input[name="password"]');
 
-    const usernameError = document.createElement('div');
-    const emailError = document.createElement('div');
-    const passwordError = document.createElement('div');
-
-    clearErrors();
+    // Удаляем предыдущие красные рамки, если они есть
+    document.querySelectorAll('.red-border').forEach(el => el.classList.remove('red-border'));
 
     let isValid = true;
 
-    if (!/^[a-zA-Z0-9]+$/.test(username)) {
-      usernameError.textContent = "Логин: только англ. буквы и цифры.";
-      usernameError.classList.add('error');
-      document.querySelector('input[name="username"]').parentNode.appendChild(usernameError);
+    // Валидация имени пользователя
+    if (!/^[a-zA-Z0-9]+$/.test(usernameInput.value)) {
+      usernameInput.classList.add('red-border');
       isValid = false;
     }
 
-    if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9.]+$/.test(email)) {
-      emailError.textContent = "Почта: некорректный формат.";
-      emailError.classList.add('error');
-      document.querySelector('input[name="email"]').parentNode.appendChild(emailError);
+    // Валидация email
+    if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9.]+$/.test(emailInput.value)) {
+      emailInput.classList.add('red-border');
       isValid = false;
     }
 
-    if (password.length < 8 || !/^[a-zA-Z0-9]+$/.test(password)) {
-      passwordError.textContent = "Пароль: мин. 8 символов, только англ. буквы и цифры.";
-      passwordError.classList.add('error');
-      document.querySelector('input[name="password"]').parentNode.appendChild(passwordError);
+    // Валидация пароля
+    if (passwordInput.value.length < 8 || !/^[a-zA-Z0-9]+$/.test(passwordInput.value)) {
+      passwordInput.classList.add('red-border');
       isValid = false;
     }
 
     return isValid;
   }
 
-  // Очистка ошибок
-  function clearErrors() {
-    const errors = document.querySelectorAll('.error');
-    errors.forEach(error => error.remove());
-  }
-
+  // Обработчик отправки формы
   const form = document.querySelector('form');
-
   if (form) {
     form.addEventListener('submit', function(event) {
       event.preventDefault(); // Отмена отправки формы по умолчанию
 
-      if (!validateForm()) return; // Если валидация не пройдена
+      if (!validateForm()) {
+        // Если валидация не пройдена, выходим из функции
+        return;
+      }
 
-      // Отправка данных через fetch
+      // Отправка данных через fetch, если валидация успешна
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form)
       })
       .then(response => {
         if (response.ok) {
-          // Перенаправление при успехе.  Замените '/login' на нужный вам URL.
+          // Перенаправление при успехе. Замените '/login' на нужный вам URL.
           window.location.href = '/login';
         } else {
           console.error('Ошибка:', response.status); // Вывод ошибки
+          // Можно добавить визуальное оповещение об общей ошибке сервера, если нужно
         }
       })
       .catch(error => {
         console.error('Ошибка сети:', error); // Вывод ошибки сети
+        // Можно добавить визуальное оповещение об ошибке сети
       });
     });
   }

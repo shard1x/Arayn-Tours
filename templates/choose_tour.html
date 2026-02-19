@@ -18,7 +18,7 @@
 </video>
 
     <div class="top-right-container">
-        <a href="/profile" class="profile-button">Профиль</a>
+        <a href="http://localhost:5002/profile" class="profile-button">Профиль</a>
     </div>
 
     <div class="catalog-title">КАТАЛОГ ТУРОВ</div>
@@ -62,7 +62,7 @@
     <div class="button-section">
         <button onclick="location.href='/about'">О нас</button>
         <button onclick="location.href='/contacts'">Контакты</button>
-        <button onclick="location.href='/reviews'">Отзывы</button>
+        <button onclick="location.href='http://localhost:5001/reviews'">Отзывы</button>
     </div>
 
     {% with messages = get_flashed_messages(with_categories=true) %}

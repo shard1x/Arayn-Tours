@@ -3,25 +3,26 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1e2e2b; /* Темно-зеленый фон */
-    color: #e0e0e0; /* Светлый текст */
+    background-color: #1e2e2b; /* Темно-зеленый фон - сохранен */
+    color: #e0e0e0; /* Светлый текст - сохранен */
 }
 
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Занимает всю высоту экрана */
+    min-height: 100vh;
 }
 
 .content {
-    flex: 1; /* Растягивает контент, чтобы футер был внизу */
+    flex: 1;
     padding: 20px;
 }
 
 /* Заголовок */
 h2, h3 {
     text-align: center;
-    color: #fff;
+    color: #fff; /* Белый заголовок - сохранен */
+    margin-bottom: 25px; /* Немного больше отступа */
 }
 
 /* Форма отзыва */
@@ -29,64 +30,88 @@ form {
     margin: 20px auto;
     width: 80%;
     max-width: 500px;
-    padding: 20px;
-    background-color: #333;
-    border-radius: 8px;
+    padding: 25px; /* Увеличим padding */
+    background-color: #333; /* Темно-серый фон формы - сохранен */
+    border-radius: 10px; /* Слегка скруглим углы */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Добавим тень для объема */
 }
+
 textarea, select {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Увеличим padding для полей */
     margin-bottom: 10px;
     border: 1px solid #555;
-    background-color: #444;
+    background-color: #444; /* Темно-серый фон полей - сохранен */
     color: #fff;
-    border-radius: 4px;
+    border-radius: 5px; /* Слегка скруглим углы */
+    font-size: 16px; /* Увеличим размер шрифта */
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Зеленый цвет кнопки - сохранен */
     color: #fff;
     border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
+    padding: 12px 20px; /* Увеличим padding кнопки */
+    border-radius: 5px; /* Скруглим углы */
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Добавим transition на shadow */
+    font-size: 16px;
+    font-weight: bold; /* Сделаем шрифт жирным */
 }
 
 button:hover {
-    background-color: #388e3c;
-    transform: scale(1.05);
+    background-color: #388e3c; /* Более темный зеленый при наведении - сохранен */
+    transform: translateY(-3px); /* Легкое поднятие */
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4); /* Добавим тень при наведении */
 }
 
 /* Отзывы */
 .review {
-    background-color: #333;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
+    background-color: #333; /* Темно-серый фон отзыва - сохранен */
+    padding: 15px 20px; /* Увеличим горизонтальный padding */
+    margin: 10px auto; /* Центрируем блок отзыва */
+    width: 80%; /* Ширина отзыва */
+    max-width: 500px; /* Максимальная ширина */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Легкая тень */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.review:hover {
+    transform: translateY(-5px); /* Приподнимаем отзыв при наведении */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Более выраженная тень */
 }
 
 .review p {
-    margin: 0;
+    margin: 0 0 10px 0; /* Отступ между параграфами */
+    line-height: 1.6; /* Улучшим читаемость */
+}
+
+.review-author {
+    font-weight: bold;
+    color: #a5d6a7; /* Светлый зеленый для имени автора */
+}
+
+.review-rating {
+    color: #FFD700; /* Золотой цвет для рейтинга */
+    font-weight: bold;
 }
 
 /* Футер */
 .footer {
-    background-color: #2b4d23;
-    color: #fff;
+    background-color: #2b4d23; /* Темно-зеленый футер - сохранен */
+    color: #e0e0e0; /* Светлый текст футера - сохранен */
     text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    padding: 15px;
+    margin-top: 30px; /* Отступ сверху */
+    font-size: 14px;
 }
 
 /* Логотип */
 .logo-link {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 15px;
+    left: 15px;
     z-index: 1000;
 }
 
@@ -98,22 +123,94 @@ button:hover {
 /* Кнопка профиля */
 .top-right-container {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
     z-index: 1000;
 }
 
 .profile-button {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Зеленый цвет кнопки - сохранен */
     color: #fff;
     border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
+    padding: 10px 18px;
+    border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.profile-button:hover {
+    background-color: #388e3c; /* Более темный зеленый при наведении - сохранен */
+    transform: translateY(-2px);
 }
 
 /* Сообщение о входе */
 .login-prompt {
     text-align: center;
     margin-top: 50px;
+    padding: 20px;
+    background-color: #444; /* Темный фон для сообщения */
+    border-radius: 8px;
+    color: #e0e0e0;
+}
+
+.login-prompt a {
+    color: #a5d6a7; /* Светлый зеленый для ссылок */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.login-prompt a:hover {
+    color: #fff; /* Белый при наведении */
+    text-decoration: underline;
+}
+
+/* Сообщения об ошибках/успехе */
+.alert {
+    padding: 15px;
+    margin: 20px auto; /* Центрируем сообщения */
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.alert-success {
+    background-color: #28a745; /* Зеленый фон */
+    color: #fff;
+}
+
+.alert-danger {
+    background-color: #dc3545; /* Красный фон */
+    color: #fff;
+}
+
+.alert-info {
+    background-color: #17a2b8; /* Голубой фон */
+    color: #fff;
+}
+
+/* Дополнительные стили для звезд */
+.star-rating {
+    unicode-bidi: bidi-override;
+    color: #FFD700; /* Золотой цвет */
+    font-size: 24px; /* Немного увеличим размер звезд */
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+}
+.star-rating .filled {
+    color: #FFD700;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+}
+.star-rating .half { /* Может быть использовано для неполных звезд, если требуется JS */
+    width: 50%;
+}
+.star-rating .empty {
+    color: #666; /* Более темный серый для пустых звезд */
 }

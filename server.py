@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import psycopg2
+from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -9,6 +10,8 @@ app.config['DB_HOST'] = 'localhost'
 app.config['DB_NAME'] = 'Aryan Tours'
 app.config['DB_USER'] = 'postgres'
 app.config['DB_PASSWORD'] = '1'
+
+CORS(app)
 
 ADMIN_USERNAME = "ADMIN"
 ADMIN_EMAIL = ""
