@@ -1,13 +1,13 @@
-/* Общие стили */
+/* Общие стили (тёмно-зелёная гамма) */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1e2e2b;
-    color: #e0e0e0;
-    display: flex; /* Используем flexbox для компоновки */
-    flex-direction: column; /* Располагаем элементы вертикально */
-    min-height: 100vh; /* Минимальная высота - 100% высоты экрана */
+    background-color: #0a1d0a; /* чуть более тёмный фон */
+    color: #d0d0d0; /* светлый текст для читаемости */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Контейнер для кнопок на баннере */
@@ -23,33 +23,31 @@ body {
 
 /* Баннер */
 .banner {
-    background-image: url('/static/images/main-banner1 = NONE.jpg'); /* Укажите путь к вашей картинке! */
     background-size: cover;
-    height: 1000px; /* Высота баннера */
+    height: 693px;
     width: 100%;
     display: flex;
-    flex-direction: column; /* Вертикальное расположение элементов */
-    align-items: center; /* Выравнивание по центру */
-    justify-content: space-around; /* Равномерное распределение места между элементами */
-    padding: 20px 50px; /* Уменьшены отступы, добавлено по бокам */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px 50px;
     box-sizing: border-box;
     position: relative;
+    background-color: #1a2b1a; /* чтобы более гармонично сочеталось с фоном */
 }
 
-.banner-content {
-    text-align: center; /* Центрирование текста */
-    margin-top: 20px; /* Отступ сверху */
-}
-
+/* Заголовок внутри баннера */
 .banner h1 {
-    color: white;
+    color: #c0f0c0; /* светлый зелёный для акцента */
     font-size: 4em;
     margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
+/* Основная кнопка на баннере */
 .banner-button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #379237; /* более насыщенный тёмно-зелёный */
+    color: #fff;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -58,212 +56,196 @@ body {
     border-radius: 25px;
     cursor: pointer;
     border: none;
-    margin-top: 20px;  /* Добавили отступ сверху */
+    margin-top: 20px;
 }
-/* Общие стили для кнопок */
+
 button {
-    background-color: #4CAF50; /* Зеленый цвет */
-    color: #fff;                /* Белый текст */
-    border: none;                /* Убираем рамку */
-    padding: 10px 15px;         /* Отступы */
-    border-radius: 4px;         /* Закругленные углы */
-    cursor: pointer;            /* Меняем вид курсора при наведении */
-    transition: background-color 0.3s, transform 0.2s; /* Плавные переходы */
-    font-size: 14px;              /* Размер шрифта */
+    background-color: #379237; /* тёмно-зелёный */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
 }
 
+/* hover для кнопок */
 button:hover {
-    background-color: #388e3c; /* Немного темнее при наведении */
-    transform: scale(1.05);    /* Увеличение при наведении */
+    background-color: #2e7d32; /* чуть более темный зелёный */
+    transform: scale(1.05);
 }
 
-/* Фон стран */
+/* Стиль блока стран */
 .country-section {
-    /*background-color: rgba(0, 0, 0, 0.5); /* Цвет фона с прозрачностью */
-    padding: 20px;
     text-align: center;
-    width: 100%; /*  Увеличиваем ширину блока стран */
-    margin: 0 auto; /*  Центрируем блок стран */
-    border-radius: 10px; /*  Добавим скругление углов */
-    margin-top: 50px  /*  Отступ сверху */
+    background-color: #0; /* чуть прозрачный тёмно-зеленый */
 }
 
-/* Базовые стили для тела страницы */
+/* Основной контейнер */
 .page-container {
-  flex: 1; /* Занимает все доступное пространство, "толкает" футер вниз */
-  padding: 20px;
+    flex: 1;
+    padding: 20px;
 }
 
 /* Футер */
 .footer {
-  background-color: #2b4d23;
-  color: #fff;
-  font-size: 14px;
-  padding: 10px 0;
-  text-align: center;
-  z-index: 1000;
-  width: 100%;
-  margin-top: auto; /* Прижимает футер к низу */
+    background-color: #164016; /* тёмный зелёный */
+    color: #eee;
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
 }
 
 /* Логотип */
 .logo-link {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1002; /* убедитесь, что лого над кнопками */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1002;
 }
 .logo {
-  width: 150px;
-  height: auto;
+    width: 150px;
+    height: auto;
 }
 
-/* Универсальный скрыващий класс */
+/* Универсальный класс скрытия */
 .hidden {
-  display: none;
+    display: none;
 }
 
-/* Центрирование и отступы для кнопок */
-.button-section { /* можно удалить т.к. не используется */
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
+/* Центрирование кнопок */
+.button-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
 }
 
 /* Основной контент */
-.content { /* можно удалить */
-  flex: 1;
-  padding: 20px;
+.content {
+    flex: 1;
+    padding: 20px;
 }
 
 /* Стили для списка Hikes */
-#hikesList { /* можно удалить */
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
+#hikesList {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
 }
 #hikesList li {
-  margin: 5px 0;
+    margin: 5px 0;
 }
 
 /* Карусель */
 .carousel-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
 }
 
-/* контейнер для отображения одной карточки */
+/* Контейнер карточки страны */
 .carousel-container {
-  width: 600px; /*  Увеличиваем ширину контейнера*/
-  overflow: hidden;
-  border: 2px solid #555;
-  border-radius: 8px;
-  margin: 0 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  height: 400px; /* чуть больше высоты карточки для кнопок */
-  position: relative;
+    width: 600px;
+    overflow: hidden;
+    border: 2px solid #445; /* чуть светлее */
+    border-radius: 8px;
+    margin: 0 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    height: 400px;
+    position: relative;
+    background-color: #1f2f1f; /* для фона карточки */
 }
 
-/* обертка всех карточек */
+/* Обертка карточек */
 .cards-wrapper {
-  display: flex;
-  transition: transform 0.5s ease; /* <- Transition here */
+    display: flex;
+    transition: transform 0.5s ease;
 }
 
-/* стиль карточки страны */
+/* Стиль карточки страны */
 .country-card {
-  flex: 0 0 600px; /* фикс ширина для каждой карточки */
-  display: flex;
-  flex-direction: column; /* располагаем изображение и название вертикально */
-  border: 1px solid #444;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #2e3b34;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-  box-sizing: border-box;
-  margin: 0;
-  position: relative; /* Добавляем position relative */
+    flex: 0 0 600px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #445;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #273827; /* чуть светлее карточки */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
 }
 
-/* разворот карточки при наведении */
+/* При наведении карточки */
 .country-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-  transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+    transform: translateY(-2px);
 }
 
-/* изображение */
+/* Изображение карточки */
 .card-wrapper img {
-  width: 100%; /* ширина на всю карточку */
-  height: 400px; /* высота как в задании */
-  object-fit: cover; /* изображение заполнит контейнер, сохраняя пропорции */
-  display: block; /* Убираем возможный отступ снизу изображения */
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
 }
 
-/* название страны */
+/* Название страны */
 .country-name {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  padding: 8px 12px;
-  background-color: rgba(30, 46, 43, 0.3);
-  border-radius: 4px;
-  color: #fff; /* Светлый цвет текста для контраста */
-  position: absolute; /* Меняем на absolute */
-  bottom: 0; /* Прижимаем к низу */
-  left: 0; /* Прижимаем к левому краю */
-  width: 100%; /* Растягиваем на всю ширину */
-  z-index: 2; /* Убеждаемся, что текст поверх других элементов */
-  box-sizing: border-box; /* Важно для правильного расчета ширины с учетом padding */
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 12px;
+    background-color: rgba(10, 26, 10, 0.4);
+    border-radius: 4px;
+    color: #eef; /* чуть более светлый для читаемости */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    box-sizing: border-box;
 }
 
-/* Добавляем контейнер для элементов в правом верхнем углу */
+/* Верхний правый контейнер (кнопки профиля и т.п.) */
 .top-right-container {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;/* не нужно менять */
-  display: flex; /* Используем flex для выравнивания элементов */
-  align-items: center; /* Выравниваем элементы по вертикали */
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
 }
 
-/* Стили для кнопки профиля */
+/* Кнопка профиля */
 .profile-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  font-size: 14px;
-  margin-left: 10px; /* Добавляем отступ слева от кнопки */
+    background-color: transparent;
+    color: #c0f0c0;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
+    background-color: rgba(76, 175, 80, 0.15);
+    border-color: #4CAF50;
+    transform: scale(1.1);
 }
 
-/* Корректируем позиционирование логотипа для избежания перекрытия */
-.logo-link {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1002;/* убедитесь, что лого над кнопками */
-}
-
-* Добавляем класс для заголовка "Arya Tours" */
-.banner h1.arya-tours {
-    position: absolute; /* Абсолютное позиционирование */
-    top: auto;          /* Сбрасываем вернхее значение auto  */
-    bottom: 200px;       /* Размещаем над блоком стран, регулируйте значение */
-    left: 50%;           /* Центрируем по горизонтали */
-    transform: translateX(-50%); /* Корректируем для точного центрирования */
-    width: 100%;          /* Занимает всю ширину баннера */
-    text-align: center;   /* Выравнивание текста по центру */
-    margin: 0;           /* Убираем лишние отступы */
-    z-index: 10;          /* Устанавливаем z-index больше, чем у фона  */
+.profile-image {
+    width: 40px;
+    height: 55px;
+    object-fit: contain;
 }

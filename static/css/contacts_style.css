@@ -3,6 +3,8 @@ body {
   font-family: Arial, sans-serif;
   background-color: #1e2e2b; /* тёмно-зеленый фон */
   color: #e0e0e0; /* светлый текст для контраста */
+  margin: 0; /* Убираем стандартный отступ у body */
+  padding-bottom: 60px; /* Добавляем отступ снизу, чтобы футер не перекрывал контент */
 }
 
 /* Футер */
@@ -14,8 +16,9 @@ body {
   padding: 10px 0;
   text-align: center;
   z-index: 1000;
-  /*position: relative;  Изменено с fixed на relative */
+  position: fixed; /* Закрепляем футер внизу */
   bottom: 0;
+  box-sizing: border-box; /* Учитываем padding в ширине */
 }
 
 /* Логотип */
@@ -41,9 +44,8 @@ body {
   justify-content: center;
   gap: 10px;
   margin: 20px 0;
+  padding-top: 80px; /* Добавляем отступ сверху, чтобы кнопки не перекрывались логотипом */
 }
-
-/* Основной контент (убран flex: 1, padding: 20px;) */
 
 /* Стили для списка Hikes */
 #hikesList {
@@ -98,10 +100,74 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* Корректируем позиционирование логотипа для избежания перекрытия */
-.logo-link {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
+/* Стили для секции контактов */
+.contacts-section {
+  display: flex; /* Используем flexbox */
+  flex-direction: row; /* Располагаем элементы в ряд (слева направо) */
+  justify-content: center; /* Центрируем элементы по горизонтали */
+  align-items: center; /* Выравниваем элементы по вертикали */
+  margin-top: 30px; /* Отступ сверху */
+  padding-top: 70px; /* Дополнительный отступ, чтобы избежать перекрытия с кнопками */
+  gap: 20px; /* Расстояние между элементами контактов */
+}
+
+/* Стили для каждого элемента контакта */
+.contact-item {
+  display: flex;
+  align-items: center; /* Выравниваем иконку и текст по вертикали */
+  /* margin-bottom: 15px; - удалено, т.к. теперь они в ряд */
+}
+
+/* Стили для ссылок-изображений */
+.contact-link-image {
+  margin-right: 10px; /* Отступ между иконкой и текстом */
+  display: flex; /* Чтобы иконка была в центре */
+  align-items: center;
+}
+
+/* Стили для иконок контактов */
+.contact-icon {
+  width: 30px; /* Размер иконок */
+  height: 30px;
+  vertical-align: middle; /* Выравнивание по вертикали */
+}
+
+/* Стили для текстовых ссылок контактов */
+.contact-link-text {
+  color: #e0e0e0; /* Цвет текста */
+  text-decoration: none; /* Убираем подчеркивание */
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.contact-link-text:hover {
+  color: #4CAF50; /* Цвет при наведении */
+}
+
+.profile-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: transparent; /* прозрачный фон */
+  border-radius: 50%;             /* круглая форма */
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: none;               /* без тени, можно добавить если хотите */
+  border: 2px solid transparent; /* чтобы при ховере было плавное появление рамки */
+}
+
+.profile-button:hover {
+  background-color: rgba(76, 175, 80, 0.15); /* легкий зеленый свет при наведении */
+  border-color: #4CAF50;                      /* зеленая рамка при наведении */
+  transform: scale(1.1);
+}
+
+.profile-image {
+  width: 40px;
+  height: 55px;
+  object-fit: contain;
+  display: block;
 }

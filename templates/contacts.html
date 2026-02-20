@@ -9,19 +9,43 @@
 
 <!-- Логотип -->
 <a href="/" class="logo-link">
-    <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
+    <img src="/static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
 </a>
 
-<!-- Кнопка профиля -->
+<!-- Кнопка Профиль -->
 <div class="top-right-container">
-  <a href="http://localhost:5002/profile" class="profile-button">Профиль</a>
+    <a href="http://localhost:5002/profile" class="profile-button">
+        <img src="static/images/profile-icon.png" alt="Профиль" class="profile-image" />
+    </a>
 </div>
 
 <!-- Секция с кнопками -->
 <div class="button-section">
     <button onclick="location.href='/choose_tour'">Подобрать тур</button>
     <button onclick="location.href='/about'">О нас</button>
-    <button onclick="location.href='/reviews'">Отзывы</button>
+    <button onclick="location.href='http://localhost:5001/reviews'">Отзывы</button>
+</div>
+
+<!-- Секция контактов -->
+<div class="contacts-section">
+    <div class="contact-item">
+        <a href="mailto:your_email@example.com" class="contact-link-image">
+            <img src="/static/images/email-icon.png" alt="Email" class="contact-icon" />
+        </a>
+        <a href="mailto:your_email@example.com" class="contact-link-text">your_email@example.com</a>
+    </div>
+    <div class="contact-item">
+        <a href="https://t.me/your_telegram_username" class="contact-link-image" target="_blank">
+            <img src="/static/images/telegram-icon.png" alt="Telegram" class="contact-icon" />
+        </a>
+        <a href="https://t.me/your_telegram_username" class="contact-link-text" target="_blank">@your_telegram_username</a>
+    </div>
+    <div class="contact-item">
+        <a href="https://vk.com/your_vk_page" class="contact-link-image" target="_blank">
+            <img src="/static/images/vk-icon.png" alt="VK" class="contact-icon" />
+        </a>
+        <a href="https://vk.com/your_vk_page" class="contact-link-text" target="_blank">Наш VK</a>
+    </div>
 </div>
 
 <!-- Футер -->
