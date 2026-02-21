@@ -64,21 +64,20 @@ input[type="email"]:focus { /* Добавлено input[type="email"]:focus */
 
 /* Стили для кнопки */
 button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  font-size: 16px;
-  width: 100%;
+    background-color: #379237; /* тёмно-зелёный */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
 }
 
+/* hover для кнопок */
 button:hover {
-  background-color: #388e3c;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: #2e7d32; /* чуть более темный зелёный */
+    transform: scale(1.05);
 }
 
 .footer {
@@ -86,7 +85,7 @@ button:hover {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #2b4d23;
+  background-color: #164016; /* тёмный зелёный */
   color: #fff;
   font-size: 14px;
   padding: 10px 0;
@@ -109,3 +108,7 @@ button:hover {
   border: 2px solid red !important;
 }
 
+.green-text {
+  color: #4CAF50; /* зелёный цвет текста */
+  text-decoration: none; /* убрать подчеркивание */
+}

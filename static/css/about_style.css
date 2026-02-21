@@ -1,10 +1,16 @@
-/* Базовые стили для тела страницы */
+/* Общие стили (тёмно-зелёная гамма) */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #1e2e2b; /* тёмно-зеленый фон */
-  color: #e0e0e0; /* светлый текст для контраста */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/background-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #d0d0d0;
+    display: flex; /* Используем flexbox для body */
+    flex-direction: column; /* Элементы располагаются вертикально */
+    min-height: 100vh; /* Минимальная высота равна высоте видимой области */
 }
 
 /* Обертка для всего контента, чтобы закрепить футер */
@@ -72,19 +78,21 @@ body {
   margin-right: 5px; /* если не нужен отступ — сделайте 0 */
 }
 
-/* Кнопки - стиль в тёмных тонах */
 button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+    background-color: #379237; /* тёмно-зелёный */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
 }
+
+/* hover для кнопок */
 button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
+    background-color: #2e7d32; /* чуть более темный зелёный */
+    transform: scale(1.05);
 }
 
 /* Добавляем контейнер для элементов в правом верхнем углу */
@@ -154,18 +162,16 @@ button:hover {
   text-align: center;
 }
 
-/* Футер всегда внизу */
+/* Футер */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #2b4d23;
-  color: #fff;
-  font-size: 14px;
-  padding: 10px 0;
-  text-align: center;
-  z-index: 1000;
+    background-color: #164016; /* тёмный зелёный */
+    color: #eee;
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Учитываем padding в ширине */
+    /* position: static; - футер теперь находится в потоке */
 }
 
 /* Центрированный и красиво оформленный блок текста */
@@ -180,3 +186,31 @@ button:hover {
   margin: 0 auto;
 }
 
+/* Стили для кнопки профиля */
+.profile-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border-radius: 50%;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: none;
+  border: 2px solid transparent;
+}
+
+.profile-button:hover {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-color: #4CAF50;
+  transform: scale(1.1);
+}
+
+.profile-image {
+  width: 40px;
+  height: 55px;
+  object-fit: contain;
+  display: block;
+}

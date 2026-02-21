@@ -33,7 +33,10 @@
      <!-- Карусель стран -->
     <div class="country-section">
         <div class="carousel-wrapper">
-            <button id="prevBtn">«</button>
+            <!-- Заменили текстовые символы на img -->
+            <button id="prevBtn" class="carousel-btn">
+                <img src="static/images/arrow-left.png" alt="Назад" class="arrow-icon" />
+            </button>
             <div class="carousel-container">
                 <div class="cards-wrapper" id="cardsWrapper">
                     <a href="/finland" class="country-card">
@@ -68,7 +71,10 @@
                     </a>
                 </div>
             </div>
-            <button id="nextBtn">»</button>
+            <!-- Заменили текстовые символы на img -->
+            <button id="nextBtn" class="carousel-btn">
+                <img src="static/images/arrow-right.png" alt="Вперед" class="arrow-icon" />
+            </button>
         </div>
           <button class="banner-button" onclick="location.href='/choose_tour'">Подобрать тур</button>
     </div>

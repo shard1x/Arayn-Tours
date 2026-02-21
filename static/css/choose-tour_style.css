@@ -1,18 +1,16 @@
-/* choose-tour_style.css */
+/* Общие стили (тёмно-зелёная гамма) */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1e2e2b;
-    color: #e0e0e0;
-    overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
-}
-
-.page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding-bottom: 60px;
+    background-image: url('/static/images/background-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #d0d0d0;
+    display: flex; /* Используем flexbox для body */
+    flex-direction: column; /* Элементы располагаются вертикально */
+    min-height: 100vh; /* Минимальная высота равна высоте видимой области */
 }
 
 .catalog-title {
@@ -42,8 +40,8 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #2b4d23;
-    color: #fff;
+    background-color: #164016; /* тёмный зелёный */
+    color: #eee;
     font-size: 14px;
     padding: 10px 0;
     text-align: center;
@@ -88,7 +86,7 @@ body {
 
 /* Обновленный стиль для кнопки "Оставить заявку" */
 .application-button {
-    background-color: #4CAF50;
+    background-color: #379237; /* тёмно-зелёный */
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -103,8 +101,9 @@ body {
 
 }
 
-.application-button:hover {
-    background-color: #388e3c;
+/* hover для кнопок */
+button:hover {
+    background-color: #2e7d32; /* чуть более темный зелёный */
     transform: scale(1.05);
 }
 
@@ -140,22 +139,32 @@ button:hover {
   align-items: center; /* Выравниваем элементы по вертикали */
 }
 
-/* Стили для кнопки профиля */
+/* Кнопка профиля */
 .profile-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  font-size: 14px;
-  margin-left: 10px; /* Добавляем отступ слева от кнопки */
+    background-color: transparent;
+    color: #c0f0c0;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
+    background-color: rgba(76, 175, 80, 0.15);
+    border-color: #4CAF50;
+    transform: scale(1.1);
+}
+
+.profile-image {
+    width: 40px;
+    height: 55px;
+    object-fit: contain;
 }
 
 /* Корректируем позиционирование логотипа для избежания перекрытия */
@@ -174,4 +183,21 @@ button:hover {
   height: 100%;
   object-fit: cover;
   z-index: -1;
+}
+
+button {
+    background-color: #379237; /* тёмно-зелёный */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
+}
+
+/* hover для кнопок */
+button:hover {
+    background-color: #2e7d32; /* чуть более темный зелёный */
+    transform: scale(1.05);
 }

@@ -5,15 +5,21 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #2e4a41; /* Более приглушенный зеленый */
+    background-color: rgba(46, 74, 65, 0.8); /* Сделаем фон полупрозрачным, чтобы изображение было видно */
     padding: 20px;
-    border-radius: 8px; /* Более мягкое скругление */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Улучшенная тень */
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1001;
     width: 400px;
     color: #e0e0e0;
-    font-family: Arial, sans-serif; /* Явное указание шрифта */
-    box-sizing: border-box; /* Важно для учета padding в ширине */
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+
+    /* Фоновое изображение */
+    background-image: url('/static/images/back_form-image.jpg'); /* Замените на реальный путь к вашей картинке */
+    background-size: cover; /* Масштабирует изображение, чтобы оно покрывало весь элемент */
+    background-position: center; /* Центрирует изображение */
+    background-repeat: no-repeat; /* Предотвращает повторение изображения */
 }
 
 .form-content {
@@ -76,7 +82,7 @@ input[type="tel"]:focus {
 }
 
 .application-form button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #379237; /* тёмно-зелёный */
     color: #fff;
     border: none;
     padding: 12px 20px; /* Увеличенные отступы*/

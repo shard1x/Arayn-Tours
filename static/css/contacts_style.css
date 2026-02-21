@@ -1,29 +1,40 @@
-/* Остальные стили */
+/* Общие стили (тёмно-зелёная гамма) */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #1e2e2b; /* тёмно-зеленый фон */
-  color: #e0e0e0; /* светлый текст для контраста */
-  margin: 0; /* Убираем стандартный отступ у body */
-  padding-bottom: 60px; /* Добавляем отступ снизу, чтобы футер не перекрывал контент */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/background-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #d0d0d0;
+    display: flex; /* Используем flexbox для body */
+    flex-direction: column; /* Элементы располагаются вертикально */
+    min-height: 100vh; /* Минимальная высота равна высоте видимой области */
+}
+
+/* Контейнер для основного контента */
+.content {
+    flex-grow: 1; /* Контент занимает всё доступное пространство между хедерами и футером */
+    padding: 20px;
+    /* margin-bottom: 0; - не нужен, так как футер теперь сам внизу */
 }
 
 /* Футер */
 .footer {
-  width: 100%;
-  background-color: #2b4d23;
-  color: #fff;
-  font-size: 14px;
-  padding: 10px 0;
-  text-align: center;
-  z-index: 1000;
-  position: fixed; /* Закрепляем футер внизу */
-  bottom: 0;
-  box-sizing: border-box; /* Учитываем padding в ширине */
+    background-color: #164016; /* тёмный зелёный */
+    color: #eee;
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Учитываем padding в ширине */
+    /* position: static; - футер теперь находится в потоке */
 }
 
 /* Логотип */
 .logo-link {
-  position: fixed;
+  position: fixed; /* Оставляем фиксированным, чтобы он всегда был виден */
   top: 10px;
   left: 10px;
   z-index: 1000;
@@ -32,6 +43,46 @@ body {
   width: 150px;
   height: auto;
 }
+
+/* Кнопка Профиль (контейнер) */
+.top-right-container {
+  position: fixed; /* Оставляем фиксированным */
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+/* Стили для кнопки профиля */
+.profile-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border-radius: 50%;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: none;
+  border: 2px solid transparent;
+}
+
+.profile-button:hover {
+  background-color: rgba(76, 175, 80, 0.15);
+  border-color: #4CAF50;
+  transform: scale(1.1);
+}
+
+.profile-image {
+  width: 40px;
+  height: 55px;
+  object-fit: contain;
+  display: block;
+}
+
 
 /* Универсальный скрыващий класс */
 .hidden {
@@ -57,117 +108,73 @@ body {
   margin: 5px 0;
 }
 
-/* Кнопки */
 button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+    background-color: #379237; /* тёмно-зелёный */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
 }
+
+/* hover для кнопок */
 button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
-}
-
-/* Добавляем контейнер для элементов в правом верхнем углу */
-.top-right-container {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  display: flex; /* Используем flex для выравнивания элементов */
-  align-items: center; /* Выравниваем элементы по вертикали */
-}
-
-/* Стили для кнопки профиля */
-.profile-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  font-size: 14px;
-  margin-left: 10px; /* Добавляем отступ слева от кнопки */
-}
-
-.profile-button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
+    background-color: #2e7d32; /* чуть более темный зелёный */
+    transform: scale(1.05);
 }
 
 /* Стили для секции контактов */
 .contacts-section {
-  display: flex; /* Используем flexbox */
-  flex-direction: row; /* Располагаем элементы в ряд (слева направо) */
-  justify-content: center; /* Центрируем элементы по горизонтали */
-  align-items: center; /* Выравниваем элементы по вертикали */
-  margin-top: 30px; /* Отступ сверху */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
   padding-top: 70px; /* Дополнительный отступ, чтобы избежать перекрытия с кнопками */
-  gap: 20px; /* Расстояние между элементами контактов */
+  gap: 20px;
 }
 
 /* Стили для каждого элемента контакта */
 .contact-item {
   display: flex;
-  align-items: center; /* Выравниваем иконку и текст по вертикали */
-  /* margin-bottom: 15px; - удалено, т.к. теперь они в ряд */
+  align-items: center;
 }
 
 /* Стили для ссылок-изображений */
 .contact-link-image {
-  margin-right: 10px; /* Отступ между иконкой и текстом */
-  display: flex; /* Чтобы иконка была в центре */
+  margin-right: 10px;
+  display: flex;
   align-items: center;
 }
 
 /* Стили для иконок контактов */
 .contact-icon {
-  width: 30px; /* Размер иконок */
+  width: 30px;
   height: 30px;
-  vertical-align: middle; /* Выравнивание по вертикали */
+  vertical-align: middle;
 }
 
 /* Стили для текстовых ссылок контактов */
 .contact-link-text {
-  color: #e0e0e0; /* Цвет текста */
-  text-decoration: none; /* Убираем подчеркивание */
+  color: #e0e0e0;
+  text-decoration: none;
   font-size: 16px;
   transition: color 0.3s;
 }
 
 .contact-link-text:hover {
-  color: #4CAF50; /* Цвет при наведении */
+  color: #4CAF50;
 }
 
-.profile-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: transparent; /* прозрачный фон */
-  border-radius: 50%;             /* круглая форма */
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: none;               /* без тени, можно добавить если хотите */
-  border: 2px solid transparent; /* чтобы при ховере было плавное появление рамки */
-}
-
-.profile-button:hover {
-  background-color: rgba(76, 175, 80, 0.15); /* легкий зеленый свет при наведении */
-  border-color: #4CAF50;                      /* зеленая рамка при наведении */
-  transform: scale(1.1);
-}
-
-.profile-image {
-  width: 40px;
-  height: 55px;
-  object-fit: contain;
-  display: block;
+/* Контейнер для кнопок на баннере */
+.top-buttons-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
+    display: flex;
+    gap: 10px;
 }

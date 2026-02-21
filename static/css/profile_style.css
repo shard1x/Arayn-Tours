@@ -1,10 +1,16 @@
+/* Общие стили (тёмно-зелёная гамма) */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #1e2e2b;
-  color: #e0e0e0;
-  line-height: 1.6; /* Улучшает читаемость текста */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/background-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #d0d0d0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .page-container {
@@ -29,8 +35,7 @@ body {
 /* Стили для кнопок (например, для выхода) */
 .button {
   display: inline-block; /* Позволяет задавать width/height и margin/padding */
-  background-color: #5cb85c; /* Более приятный цвет */
-  color: white;
+  background-color: #379237; /* более насыщенный тёмно-зелёный */  color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -56,13 +61,14 @@ body {
   height: auto;
 }
 
+/* Футер */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #2b4d23;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
+    background-color: #164016; /* тёмный зелёный */
+    color: #eee;
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Учитываем padding в ширине */
+    /* position: static; - футер теперь находится в потоке */
 }
