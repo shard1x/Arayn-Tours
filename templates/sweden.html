@@ -4,21 +4,34 @@
     <meta charset="UTF-8" />
     <title>Швеция</title>
     <!-- Подключение внешнего CSS -->
-<link rel="stylesheet" href="/static/css/country_style.css" />
+    <link rel="stylesheet" href="/static/css/country_style.css" />
+    <!-- Подключение CSS для этой страницы (если стили специфичны) -->
+    <link rel="stylesheet" href="/static/css/attraction_page.css" />
 </head>
 <body>
+
+<!-- Основной контент -->
+<div class="button-section">
+    <button onclick="location.href='/about'">О нас</button>
+    <button onclick="location.href='/contacts'">Контакты</button>
+    <button onclick="location.href='/reviews'">Отзывы</button>
+</div>
+
+    <!-- Блок с информацией о достопримечательности -->
+    <div class="attraction-info">
+        <h2>Абиско</h2>
+        <p>
+            Познакомьтесь с <strong>глубинкой национального парка Абиско</strong> так, как это делали исследователи Арктики на протяжении веков. Окунитесь в тишину на снегоступах и отправьтесь в незабываемое путешествие по дикой природе!
+        </p>
+        <p>
+            Эта невероятная экскурсия на снегоступах предлагает идиллический способ погрузиться в арктический березовый лес, насладиться горными панорамами и вдохнуть чистейший арктический воздух. <strong>Путешествуя по местности, у вас будет возможность проследить по следам наших местных диких животных, таких как лоси, лисы, арктические зайцы и многие другие</strong>!
+        </p>
+    </div>
 
 <!-- Логотип в левом верхнем -->
 <a href="/" class="logo-link">
     <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
 </a>
-
-<!-- Основной контент -->
-<div class="button-section">
-    <button id="hikesButton">Походы</button>
-    <button onclick="location.href='/about'">О нас</button>
-    <button onclick="location.href='/reviews'">Отзывы</button>
-</div>
 
 <!-- Футер -->
 <div class="footer">

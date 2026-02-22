@@ -83,9 +83,9 @@ def sweden():
 def norway():
     return render_template('norway.html')
 
-@app.route('/karelia')
+@app.route('/russia')
 def russia():
-    return render_template('karelia.html')
+    return render_template('russia.html')
 
 @app.route('/germany')
 def germany():

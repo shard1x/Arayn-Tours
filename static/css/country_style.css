@@ -1,10 +1,16 @@
-/* Базовые стили для тела страницы */
+/* Общие стили (тёмно-зелёная гамма) */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #1e2e2b; /* тёмно-зеленый фон */
-  color: #e0e0e0; /* светлый текст для контраста */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/background-image.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #d0d0d0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Обертка для всего контента, чтобы закрепить футер */
@@ -21,7 +27,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #2b4d23;
+  background-color: #164016; /* тёмный зелёный */
   color: #fff;
   font-size: 14px;
   padding: 10px 0;
@@ -72,16 +78,49 @@ body {
 
 /* Кнопки - стиль в тёмных тонах */
 button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
+    background-color: #379237; /* тёмно-зелёный */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
 }
 
+/* hover для кнопок */
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Стиль для блока с текстом */
+.attraction-info {
+    position: relative; /* Необходимо для корректного позиционирования z-index */
+    z-index: 10; /* Помещаем поверх затемнённой подкладки */
+    max-width: 800px; /* Ограничиваем ширину текста */
+    margin: 50px auto; /* Центрируем блок и добавляем верхний отступ */
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.05); /* Лёгкий фон для самого блока текста */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Тень для выделения блока */
+    backdrop-filter: blur(5px); /* Эффект размытия фона под блоком */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Тонкая рамка */
+    color: #d0d0d0; /* Цвет текста в блоке */
+}
+
+.attraction-info h2 {
+    text-align: center;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.attraction-info p {
+    line-height: 1.6;
+    font-size: 16px;
+    text-align: justify;
+}
+
+.attraction-info strong {
+    color: #a0a0a0; /* Выделяем важные слова */
+}

@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <title>Финляндия</title>
     <!-- Подключение внешнего CSS -->
-<link rel="stylesheet" href="/static/css/country_style.css" />
+    <link rel="stylesheet" href="/static/css/country_style.css" />
+    <!-- Подключение CSS для этой страницы (если стили специфичны) -->
+    <link rel="stylesheet" href="/static/css/attraction_page.css" />
 </head>
 <body>
 
@@ -15,10 +17,21 @@
 
 <!-- Основной контент -->
 <div class="button-section">
-    <button id="hikesButton">Походы</button>
     <button onclick="location.href='/about'">О нас</button>
+    <button onclick="location.href='/contacts'">Контакты</button>
     <button onclick="location.href='/reviews'">Отзывы</button>
 </div>
+
+    <!-- Блок с информацией о достопримечательности -->
+    <div class="attraction-info">
+        <h2>Лапландия</h2>
+        <p>
+            <strong>Лапландия, самая северная часть Финляндии</strong>, — это волшебный арктический регион, полный контрастов. Своим очарованием Лапландия обязана именно контрастам: <strong>летом на смену темным зимним дням, наполненным северным сиянием, приходит 24-часовой световой день</strong>. В финской Лапландии каждое время года сильно отличается от остальных.
+        </p>
+        <p>
+            Познакомьтесь с Санта-Клаусом в Рованиеми, посетите оленеводческое хозяйство или питомник хаски, или <strong>отправьтесь на причудливый фестиваль</strong>!
+        </p>
+    </div>
 
 <!-- Футер -->
 <div class="footer">

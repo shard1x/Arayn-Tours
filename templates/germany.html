@@ -4,25 +4,39 @@
     <meta charset="UTF-8" />
     <title>Германия</title>
     <!-- Подключение внешнего CSS -->
-<link rel="stylesheet" href="/static/css/country_style.css" />
+    <link rel="stylesheet" href="/static/css/country_style.css" />
+    <!-- Подключение CSS для этой страницы (если стили специфичны) -->
+    <link rel="stylesheet" href="/static/css/attraction_page.css" />
 </head>
 <body>
 
-<!-- Логотип в левом верхнем -->
-<a href="/" class="logo-link">
-    <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
-</a>
+    <!-- Логотип в левом верхнем -->
+    <a href="/" class="logo-link">
+        <img src="static/images/aryan-main-logo.png" alt="Логотип" class="logo" />
+    </a>
 
-<!-- Основной контент -->
-<div class="button-section">
-    <button id="hikesButton">Походы</button>
-    <button onclick="location.href='/about'">О нас</button>
-    <button onclick="location.href='/reviews'">Отзывы</button>
-</div>
+    <!-- Основной контент -->
+    <div class="button-section">
+        <button onclick="location.href='/about'">О нас</button>
+        <button onclick="location.href='/contacts'">Контакты</button>
+        <button onclick="location.href='/reviews'">Отзывы</button>
+    </div>
 
-<!-- Футер -->
-<div class="footer">
-    © Aryan Tours. Все права защищены.
-</div>
+    <!-- Блок с информацией о достопримечательности -->
+    <div class="attraction-info">
+        <h2>Бастай</h2>
+        <p>
+            <strong>Так называется сразу две достопримечательности:</strong> горный массив в национальном парке Саксонская Швейцария (Säch­siche Schweiz) и 76-метровый мост, соединяющий две скалы. Считается, что этому сооружению уже 194 года, однако с момента строительства его несколько раз переделывали.
+        </p>
+        <p>
+            Первая конструкция, деревянная, появилась в 1824 году. Через 27 лет, по мере увеличения туристов, Бастай укрепили, соорудив акведук из песчаника. Сейчас мост Бастай причислен к историческим памятникам и охраняется государством. Лучшая смотровая площадка располагается на одной из вершин Бастая, на высоте 198 м. В этом ландшафте удивительно органично сочетаются смешанные леса, скалистые глыбы, исторические руины и прозрачные воды Эльбы.
+        </p>
+    </div>
+
+    <!-- Футер -->
+    <div class="footer">
+        © Aryan Tours. Все права защищены.
+    </div>
+
 </body>
 </html>

@@ -13,43 +13,16 @@ body {
     min-height: 100vh; /* Минимальная высота равна высоте видимой области */
 }
 
-/* Обертка для всего контента, чтобы закрепить футер */
-.page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 60px;
-}
-
-/* Футер */
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #2b4d23;
-  color: #fff;
-  font-size: 14px;
-  padding: 10px 0;
-  text-align: center;
-  z-index: 1000;
-}
-
 /* Логотип - фиксирован */
 .logo-link {
   position: fixed;
   top: 10px;
   left: 10px;
-  z-index: 1000;
+  z-index: 1000; /* Чтобы был поверх других элементов */
 }
 .logo {
   width: 150px;
   height: auto;
-}
-
-/* Универсальный скрыващий класс */
-.hidden {
-  display: none;
 }
 
 /* Центрирование и отступы для кнопок */
@@ -60,130 +33,14 @@ body {
   margin: 20px 0;
 }
 
-/* Основной контент */
-.content {
-  flex: 1;
-  padding: 20px;
-}
-
-/* Стили для списка Hikes */
-#hikesList li {
-  margin: 2px 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
-#hikesList li strong {
-  margin-right: 5px; /* если не нужен отступ — сделайте 0 */
-}
-
-button {
-    background-color: #379237; /* тёмно-зелёный */
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    font-size: 14px;
-}
-
-/* hover для кнопок */
-button:hover {
-    background-color: #2e7d32; /* чуть более темный зелёный */
-    transform: scale(1.05);
-}
-
 /* Добавляем контейнер для элементов в правом верхнем углу */
 .top-right-container {
   position: fixed;
   top: 10px;
   right: 10px;
-  z-index: 1000;
+  z-index: 1000; /* Чтобы был поверх других элементов */
   display: flex; /* Используем flex для выравнивания элементов */
   align-items: center; /* Выравниваем элементы по вертикали */
-}
-
-/* Стили для кнопки профиля */
-.profile-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  font-size: 14px;
-  margin-left: 10px; /* Добавляем отступ слева от кнопки */
-}
-
-.profile-button:hover {
-  background-color: #388e3c;
-  transform: scale(1.05);
-}
-
-/* Корректируем позиционирование логотипа для избежания перекрытия */
-.logo-link {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
-}
-
-/* Обёртка для всей страницы */
-.page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 60px; /* чтобы футер не перекрывал */
-  position: relative;
-}
-
-/* Верхние кнопки */
-.button-section-top {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 20px 0;
-  background-color: transparent; /* Можно изменить, если нужно фон */
-  position: relative; /* чтобы располагались сверху */
-  z-index: 10;
-}
-
-/* Центрированный текст */
-.central-text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  text-align: center;
-}
-
-/* Футер */
-.footer {
-    background-color: #164016; /* тёмный зелёный */
-    color: #eee;
-    font-size: 14px;
-    padding: 10px 0;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box; /* Учитываем padding в ширине */
-    /* position: static; - футер теперь находится в потоке */
-}
-
-/* Центрированный и красиво оформленный блок текста */
-.central-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 /* Стили для кнопки профиля */
@@ -213,4 +70,89 @@ button:hover {
   height: 55px;
   object-fit: contain;
   display: block;
+}
+
+/* Кнопки - стиль в тёмных тонах */
+button {
+    background-color: #379237; /* тёмно-зелёный */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
+}
+
+/* hover для кнопок */
+button:hover {
+    transform: scale(1.05);
+}
+
+/* hover для кнопок */
+button:hover {
+    background-color: #2e7d32; /* чуть более темный зелёный */
+    transform: scale(1.05);
+}
+
+/* Стили для рамки и затемнённой подкладки */
+.bordered-container {
+    position: relative; /* Для позиционирования подкладки */
+    margin: 50px auto; /* Центрирование и отступ сверху/снизу */
+    padding: 30px;
+    border: 2px solid #2e7d32; /* Цвет рамки, соответствующий теме */
+    border-radius: 8px;
+    max-width: 800px; /* Максимальная ширина блока */
+    background-color: rgba(0, 0, 0, 0.1); /* Полупрозрачная подкладка */
+    backdrop-filter: blur(5px); /* Размытие фона за подкладкой */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Тень для объемности */
+    z-index: 2; /* Важно, чтобы этот блок был выше подкладки */
+}
+
+.bordered-container::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.2) 0%, rgba(30, 70, 30, 0.5) 100%); /* Градиент для затемнения */
+    z-index: 1; /* Размещение под основным контентом */
+    border-radius: 10px; /* Более сглаженные углы */
+}
+
+.bordered-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e0e0e0; /* Светлый цвет для заголовка */
+}
+
+.bordered-container p,
+.bordered-container ul {
+    line-height: 1.6;
+    color: #d0d0d0; /* Светлый цвет текста */
+}
+
+.bordered-container ul {
+    list-style-type: disc; /* Маркеры списка */
+    margin-left: 20px;
+}
+
+.bordered-container ul li {
+    margin-bottom: 10px;
+}
+
+/* Футер */
+.footer {
+    background-color: #164016; /* тёмный зелёный */
+    color: #eee;
+    font-size: 14px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    /* margin-top: auto; <-- это и есть магия для прижатия футера */
+    margin-top: auto;
+    z-index: 10; /* чтобы был виден */
+    /* Добавляем небольшой отступ сверху, если контента мало, чтобы он не слипался с bordered-container */
+    /* padding-top: 20px; */ /* Можно добавить, если нужно */
 }
