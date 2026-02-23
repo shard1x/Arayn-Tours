@@ -16,8 +16,8 @@ body {
 /* Контейнер для основного контента */
 .content {
     flex-grow: 1; /* Контент занимает всё доступное пространство между хедерами и футером */
-    padding: 20px;
-    /* margin-bottom: 0; - не нужен, так как футер теперь сам внизу */
+    padding: 100px;
+    margin-bottom: 0;
 }
 
 /* Футер */
@@ -131,8 +131,8 @@ button:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  padding-top: 70px; /* Дополнительный отступ, чтобы избежать перекрытия с кнопками */
+  margin-top: 10px;
+  padding-top: 450px; /* Дополнительный отступ, чтобы избежать перекрытия с кнопками */
   gap: 20px;
 }
 

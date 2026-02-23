@@ -89,15 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
 
-        // Предотвращаем отправку формы, если валидация не пройдена
-        if (!isValid) {
-            event.preventDefault();
-        } else {
-            // Форма валидна, показываем сообщение об успехе и закрываем форму
-            displaySuccessMessage();
-            closeForm();
-            event.preventDefault();
-        }
+            // Предотвращаем отправку формы, если валидация не пройдена
+            if (!isValid) {
+                event.preventDefault();
+            } else {
+                // Форма валидна, показываем сообщение об успехе и закрываем форму
+                displaySuccessMessage();
+                closeForm();
+                // event.preventDefault(); <-- Удалите эту строку
+            }
+
     });
 
     //создаем функцию для отображения сообщения

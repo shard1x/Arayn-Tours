@@ -11,18 +11,20 @@ document.addEventListener('DOMContentLoaded', function() {
     let isValid = true;
 
     // Валидация имени пользователя
-    if (!/^[a-zA-Z0-9]+$/.test(usernameInput.value)) {
+    // Требования: минимум 5 символов, обязательно хотя бы одна буква, можно цифры
+    const usernameValue = usernameInput.value;
+    if (usernameValue.length < 5 || !/[a-zA-Z]/.test(usernameValue) || !/^[a-zA-Z0-9]+$/.test(usernameValue)) {
       usernameInput.classList.add('red-border');
       isValid = false;
     }
 
-    // Валидация email
+    // Валидация email (ваш текущий код)
     if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9.]+$/.test(emailInput.value)) {
       emailInput.classList.add('red-border');
       isValid = false;
     }
 
-    // Валидация пароля
+    // Валидация пароля (ваш текущий код)
     if (passwordInput.value.length < 8 || !/^[a-zA-Z0-9]+$/.test(passwordInput.value)) {
       passwordInput.classList.add('red-border');
       isValid = false;
