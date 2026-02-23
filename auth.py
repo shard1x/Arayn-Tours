@@ -45,11 +45,9 @@ def profile():
     if not user_id:
         return redirect(url_for('login'))
 
-    if user_id == -1:  # админ
-        # Передаем в шаблон флаг is_admin=True, чтобы показать другое сообщение
+    if user_id == -1:
         return render_template('profile.html', is_admin=True)
 
-    # Для обычного пользователя получаем данные из базы
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("SELECT username, email FROM users WHERE id = %s", (user_id,))
@@ -78,17 +76,15 @@ def register():
             conn.commit()
             cur.close()
             conn.close()
-          #  flash('Регистрация прошла успешно!', 'success') # Отображаем сообщение об успехе
             return redirect(url_for('login', succes="Регистрация прошла успешно"))  # Перенаправляем на страницу входа
         except Exception as e:
             print(e)
             conn.rollback()
             cur.close()
             conn.close()
-          #  flash('Ошибка регистрации', 'error') # Отображаем сообщение об ошибке
             return render_template('register.html', error="Ошибка регистрации")
 
-    return render_template('register.html', error=None) #Отображаем страницу регистрации без ошибок
+    return render_template('register.html', error=None)
 
 @app.route('/logout')
 def logout():

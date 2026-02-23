@@ -50,10 +50,8 @@ def reviews():
                 return redirect(url_for('reviews'))
         else:
             flash('Необходимо авторизоваться, чтобы оставить отзыв.', 'error')
-            # Здесь заменяем url_for('login') на абсолютный URL
             return redirect('http://localhost:5002/login')
 
-    # Здесь добавьте код для получения и отображения отзывов, например:
     try:
         cur.execute("""
             SELECT reviews.id, users.username, reviews.text, reviews.rating, reviews.date
