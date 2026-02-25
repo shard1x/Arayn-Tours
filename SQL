@@ -1,0 +1,26 @@
+CREATE TABLE applications (
+    id SERIAL PRIMARY KEY,  
+    name VARCHAR(255) NOT NULL,         
+    email VARCHAR(255) NOT NULL,        
+    phone VARCHAR(20) NOT NULL,          
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+	email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    text TEXT NOT NULL,    
+    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    date DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+SELECT * FROM applications;
+SELECT * FROM users;
+SELECT * FROM reviews;
